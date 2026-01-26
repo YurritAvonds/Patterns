@@ -2,6 +2,12 @@
 
 namespace Patterns.InheritedBuilder.Third;
 
+public class ThirdBuilder : ThirdBuilder<ThirdObject>
+{
+    public ThirdBuilder() : base()
+    { }
+}
+
 public class ThirdBuilder<TThirdObject> : SecondBuilder<TThirdObject>
     where TThirdObject : ThirdObject, new()
 {

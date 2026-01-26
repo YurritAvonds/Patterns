@@ -13,7 +13,7 @@ public class ThirdBuilderTests
     public void WithId(int id)
     {
         // Arrange
-        ThirdBuilder<ThirdObject> thirdBuilder = new();
+        ThirdBuilder thirdBuilder = new();
 
         // Act
         var thirdObject = thirdBuilder
@@ -31,7 +31,7 @@ public class ThirdBuilderTests
     public void WithName(string? name)
     {
         // Arrange
-        ThirdBuilder<ThirdObject> thirdBuilder = new();
+        ThirdBuilder thirdBuilder = new();
 
         // Act
         var thirdObject = thirdBuilder
@@ -48,7 +48,7 @@ public class ThirdBuilderTests
     public void WithIsEmployed(bool isEmployed)
     {
         // Arrange
-        ThirdBuilder<ThirdObject> thirdBuilder = new();
+        ThirdBuilder thirdBuilder = new();
 
         // Act
         var thirdObject = thirdBuilder

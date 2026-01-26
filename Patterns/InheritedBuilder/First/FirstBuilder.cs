@@ -2,6 +2,12 @@
 
 namespace Patterns.InheritedBuilder.First;
 
+public class FirstBuilder : FirstBuilder<FirstObject>
+{
+    public FirstBuilder() : base()
+    { }
+}
+
 public class FirstBuilder<TFirstObject> : BaseBuilder<TFirstObject>
     where TFirstObject : FirstObject, new()
 {

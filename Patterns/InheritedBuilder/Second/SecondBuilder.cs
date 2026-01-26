@@ -2,6 +2,12 @@
 
 namespace Patterns.InheritedBuilder.Second;
 
+public class SecondBuilder : SecondBuilder<SecondObject>
+{
+    public SecondBuilder() : base()
+    { }
+}
+
 public class SecondBuilder<TSecondObject> : FirstBuilder<TSecondObject>
     where TSecondObject : SecondObject, new()
 {

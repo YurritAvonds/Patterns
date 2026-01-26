@@ -13,7 +13,7 @@ public class FirstBuilderTests
     public void WithId(int id)
     {
         // Arrange
-        FirstBuilder<FirstObject> firstBuilder = new();
+        FirstBuilder firstBuilder = new();
 
         // Act
         var firstObject = firstBuilder

@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Patterns.InheritedBuilder.Second;
-using System.Xml.Linq;
 
 namespace UnitTests;
 
@@ -14,7 +13,7 @@ public class SecondBuilderTests
     public void WithId(int id)
     {
         // Arrange
-        SecondBuilder<SecondObject> secondBuilder = new();
+        SecondBuilder secondBuilder = new();
 
         // Act
         var secondObject = secondBuilder
@@ -32,7 +31,7 @@ public class SecondBuilderTests
     public void WithName(string? name)
     {
         // Arrange
-        SecondBuilder<SecondObject> secondBuilder = new();
+        SecondBuilder secondBuilder = new();
 
         // Act
         var secondObject = secondBuilder
