@@ -2,7 +2,7 @@
 
 namespace Patterns.InheritedBuilder.First;
 
-public class FirstBuilder<TFirstObject> : BaseBuilder<TFirstObject, FirstBuilder<TFirstObject>>
+public class FirstBuilder<TFirstObject> : BaseBuilder<TFirstObject>
     where TFirstObject : FirstObject, new()
 {
     public FirstBuilder<TFirstObject> WithId(int id)
