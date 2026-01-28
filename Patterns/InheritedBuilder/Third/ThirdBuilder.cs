@@ -2,18 +2,19 @@
 
 namespace Patterns.InheritedBuilder.Third;
 
-public class ThirdBuilder : ThirdBuilder<ThirdObject>
+public class ThirdBuilder : ThirdBuilder<ThirdObject, ThirdBuilder>
 {
     public ThirdBuilder() : base()
     { }
 }
 
-public class ThirdBuilder<TThirdObject> : SecondBuilder<TThirdObject>
+public class ThirdBuilder<TThirdObject, TThirdBuilder> : SecondBuilder<TThirdObject, TThirdBuilder>
     where TThirdObject : ThirdObject, new()
+    where TThirdBuilder : ThirdBuilder<TThirdObject, TThirdBuilder>
 {
-    public ThirdBuilder<TThirdObject> WithIsEmployed(bool isEmployed)
+    public TThirdBuilder WithIsEmployed(bool isEmployed)
     {
         builderObject.IsEmployed = isEmployed;
-        return this;
+        return (TThirdBuilder)this;
     }
 }

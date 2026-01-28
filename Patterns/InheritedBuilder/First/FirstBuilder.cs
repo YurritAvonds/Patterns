@@ -2,18 +2,19 @@
 
 namespace Patterns.InheritedBuilder.First;
 
-public class FirstBuilder : FirstBuilder<FirstObject>
+public class FirstBuilder : FirstBuilder<FirstObject, FirstBuilder>
 {
     public FirstBuilder() : base()
     { }
 }
 
-public class FirstBuilder<TFirstObject> : BaseBuilder<TFirstObject>
+public class FirstBuilder<TFirstObject, TFirstBuilder> : BaseBuilder<TFirstObject, TFirstBuilder>
     where TFirstObject : FirstObject, new()
+    where TFirstBuilder : FirstBuilder<TFirstObject, TFirstBuilder>
 {
-    public FirstBuilder<TFirstObject> WithId(int id)
+    public TFirstBuilder WithId(int id)
     {
         builderObject.Id = id;
-        return this;
+        return (TFirstBuilder)this;
     }
 }

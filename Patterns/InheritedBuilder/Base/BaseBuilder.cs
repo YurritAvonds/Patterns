@@ -1,9 +1,10 @@
 ﻿namespace Patterns.InheritedBuilder.Base;
 
-public abstract class BaseBuilder<TObject>
-    where TObject : new()
+public abstract class BaseBuilder<TBaseObject, TBaseBuilder>
+    where TBaseObject : new()
+    where TBaseBuilder : BaseBuilder<TBaseObject, TBaseBuilder>
 {
-    protected TObject builderObject = new();
+    protected TBaseObject builderObject = new();
 
-    public TObject Build() => builderObject;
+    public TBaseObject Build() => builderObject;
 }
