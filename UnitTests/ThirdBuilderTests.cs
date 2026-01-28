@@ -58,4 +58,21 @@ public class ThirdBuilderTests
         // Assert
         thirdObject.IsEmployed.Should().Be(isEmployed);
     }
+
+    [Test]
+    public void FullObject()
+    {
+        // Arrange
+        ThirdBuilder thirdBuilder = new();
+
+        // Act
+        var fullObject = thirdBuilder
+            .WithId(10)
+            .WithName("Full Object")
+            .Build();
+
+        // Assert
+        fullObject.Name.Should().Be("Full Object");
+        fullObject.Id.Should().Be(10);
+    }
 }
