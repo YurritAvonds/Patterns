@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Patterns.InheritedBuilder.Second;
 using Patterns.InheritedBuilder.Third;
 
 namespace UnitTests;
@@ -74,5 +75,28 @@ public class ThirdBuilderTests
         // Assert
         fullObject.Name.Should().Be("Full Object");
         fullObject.Id.Should().Be(10);
+    }
+
+    [Test]
+    [Category("General")]
+    public void ModifyExisting()
+    {
+        // Arrange
+        var firstObject = new ThirdBuilder()
+            .WithId(9)
+            .WithName("Original")
+            .WithIsEmployed(false)
+            .Build();
+
+        // Act
+        var secondObject = new ThirdBuilder()
+            .WithExisting(firstObject)
+            .WithIsEmployed(true)
+            .Build();
+
+        // Assert
+        secondObject.Id.Should().Be(9);
+        secondObject.Name.Should().Be("Original");
+        secondObject.IsEmployed.Should().Be(true);
     }
 }

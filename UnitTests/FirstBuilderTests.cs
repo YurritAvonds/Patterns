@@ -23,4 +23,23 @@ public class FirstBuilderTests
         // Assert
         firstObject.Id.Should().Be(id);
     }
+
+    [Test]
+    [Category("General")]
+    public void ModifyExisting()
+    {
+        // Arrange
+        var firstObject = new FirstBuilder()
+            .WithId(9)
+            .Build();
+
+        // Act
+        var secondObject = new FirstBuilder()
+            .WithExisting(firstObject)
+            .WithId(10)
+            .Build();
+
+        // Assert
+        secondObject.Id.Should().Be(10);
+    }
 }
