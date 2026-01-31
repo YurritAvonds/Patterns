@@ -18,8 +18,7 @@ internal class ComponentCollectionTests
         var result = root.FirstMethod();
 
         // Assert
-        var expected = 10.0 + 2.5 + 3.5;
-        Assert.Equals(expected, result);
+        result.Should().Be((double)(10.0 + 2.5 + 3.5));
     }
 
     [Test]
@@ -34,7 +33,6 @@ internal class ComponentCollectionTests
         var result = root.SecondMethod();
 
         // Assert
-        var expected = "root|child1|child2";
-        Assert.Equals(expected, result);
+        result.Should().Be((string?)"root|child1|child2");
     }
 }

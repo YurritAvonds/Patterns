@@ -17,7 +17,7 @@ public class ComponentTests
         double actual = component.FirstMethod();
 
         // Assert
-        Assert.Equals(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [Test]
@@ -31,6 +31,6 @@ public class ComponentTests
         string actual = component.SecondMethod();
 
         // Assert
-        Assert.Equals(expected, actual);
+        actual.Should().Be(expected);
     }
 }

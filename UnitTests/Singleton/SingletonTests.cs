@@ -16,6 +16,6 @@ public class SingletonTests
         Singleton.GetInstance().FirstProperty = 50;
 
         // Assert
-        Assert.Equals(50, Singleton.GetInstance().FirstProperty);
+        Singleton.GetInstance().FirstProperty.Should().Be(50);
     }
 }
