@@ -1,11 +1,10 @@
 ﻿using FluentAssertions;
-using Patterns.InheritedBuilder.First;
 using Patterns.InheritedBuilder.Second;
 using Patterns.InheritedBuilder.Third;
 
-namespace UnitTests;
+namespace UnitTests.InheritedBuilder;
 
-public class SecondBuilderTests
+public class ThirdBuilderTests
 {
     [TestCase(-1)]
     [TestCase(0)]
@@ -15,15 +14,15 @@ public class SecondBuilderTests
     public void WithId(int id)
     {
         // Arrange
-        SecondBuilder secondBuilder = new();
+        ThirdBuilder thirdBuilder = new();
 
         // Act
-        var secondObject = secondBuilder
+        var thirdObject = thirdBuilder
             .WithId(id)
             .Build();
 
         // Assert
-        secondObject.Id.Should().Be(id);
+        thirdObject.Id.Should().Be(id);
     }
 
     [TestCase("Test Name")]
@@ -33,15 +32,32 @@ public class SecondBuilderTests
     public void WithName(string? name)
     {
         // Arrange
-        SecondBuilder secondBuilder = new();
+        ThirdBuilder thirdBuilder = new();
 
         // Act
-        var secondObject = secondBuilder
+        var thirdObject = thirdBuilder
             .WithName(name)
             .Build();
 
         // Assert
-        secondObject.Name.Should().Be(name);
+        thirdObject.Name.Should().Be(name);
+    }
+
+    [TestCase(true)]
+    [TestCase(false)]
+    [Category("With")]
+    public void WithIsEmployed(bool isEmployed)
+    {
+        // Arrange
+        ThirdBuilder thirdBuilder = new();
+
+        // Act
+        var thirdObject = thirdBuilder
+            .WithIsEmployed(isEmployed)
+            .Build();
+
+        // Assert
+        thirdObject.IsEmployed.Should().Be(isEmployed);
     }
 
     [Test]
@@ -51,16 +67,14 @@ public class SecondBuilderTests
         ThirdBuilder thirdBuilder = new();
 
         // Act
-        var thirdObject = thirdBuilder
+        var fullObject = thirdBuilder
             .WithId(10)
             .WithName("Full Object")
-            .WithIsEmployed(true)
             .Build();
 
         // Assert
-        thirdObject.IsEmployed.Should().Be(true);
-        thirdObject.Name.Should().Be("Full Object");
-        thirdObject.Id.Should().Be(10);
+        fullObject.Name.Should().Be("Full Object");
+        fullObject.Id.Should().Be(10);
     }
 
     [Test]
@@ -68,19 +82,21 @@ public class SecondBuilderTests
     public void ModifyExisting()
     {
         // Arrange
-        var firstObject = new SecondBuilder()
+        var firstObject = new ThirdBuilder()
             .WithId(9)
             .WithName("Original")
+            .WithIsEmployed(false)
             .Build();
 
         // Act
-        var secondObject = new SecondBuilder()
+        var secondObject = new ThirdBuilder()
             .WithExisting(firstObject)
-            .WithName("Modified")
+            .WithIsEmployed(true)
             .Build();
 
         // Assert
         secondObject.Id.Should().Be(9);
-        secondObject.Name.Should().Be("Modified");
+        secondObject.Name.Should().Be("Original");
+        secondObject.IsEmployed.Should().Be(true);
     }
 }

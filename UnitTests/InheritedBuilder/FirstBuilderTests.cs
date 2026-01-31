@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Patterns.InheritedBuilder.First;
 
-namespace UnitTests;
+namespace UnitTests.InheritedBuilder;
 
 public class FirstBuilderTests
 {
