@@ -5,13 +5,19 @@ namespace UnitTests.InheritedModification
 {
     internal class ParentTests
     {
+        protected IParent Creator;
+
+        public ParentTests()
+        {
+            Creator = new Parent();
+        }
+
         [Test]
-        public void Execute_ShouldReturnResultObjectWithParentString_WhenCalled()
+        public virtual void Execute_ShouldReturnResultObjectWithParentString_WhenCalled()
         {
             // Arrange
-            Parent parent = new();
             // Act
-            Result result = parent.Execute();
+            Result result = Creator.Execute();
             // Assert
             result.StringProperty.Should().Be("Parent");
         }
@@ -20,9 +26,8 @@ namespace UnitTests.InheritedModification
         public void Execute_ShouldReturnResultObjectWithInt42_WhenCalled()
         {
             // Arrange
-            Parent parent = new();
             // Act
-            Result result = parent.Execute();
+            Result result = Creator.Execute();
             // Assert
             result.IntProperty.Should().Be(42);
         }
@@ -31,9 +36,8 @@ namespace UnitTests.InheritedModification
         public void Execute_ShouldReturnResultObjectWithBoolTrue_WhenCalled()
         {
             // Arrange
-            Parent parent = new();
             // Act
-            Result result = parent.Execute();
+            Result result = Creator.Execute();
             // Assert
             result.BoolProperty.Should().BeTrue();
         }
@@ -42,9 +46,8 @@ namespace UnitTests.InheritedModification
         public void Execute_ShouldReturnResultObjectWithDoublePi_WhenCalled()
         {
             // Arrange
-            Parent parent = new();
             // Act
-            Result result = parent.Execute();
+            Result result = Creator.Execute();
             // Assert
             result.DoubleProperty.Should().Be(3.14);
         }

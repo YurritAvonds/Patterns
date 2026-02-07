@@ -1,6 +1,6 @@
 ﻿namespace Patterns.InheritedModification;
 
-public class Parent
+public class Parent : IParent
 {
     public virtual Result Execute() => new()
     {

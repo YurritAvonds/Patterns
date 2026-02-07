@@ -3,50 +3,22 @@ using Patterns.InheritedModification;
 
 namespace UnitTests.InheritedModification
 {
-    internal class ChildTests
+    internal class ChildTests : ParentTests
     {
+        public ChildTests()
+        {
+            Creator = new Child();
+        }
+
         [Test]
-        public void Execute_ShouldReturnResultObjectWithParentString_WhenCalled()
+        public override void Execute_ShouldReturnResultObjectWithParentString_WhenCalled()
         {
             // Arrange
             Child child = new();
             // Act
-            Result result = child.Execute();
+            Result result = Creator.Execute();
             // Assert
             result.StringProperty.Should().Be("Child");
-        }
-
-        [Test]
-        public void Execute_ShouldReturnResultObjectWithInt42_WhenCalled()
-        {
-            // Arrange
-            Child child = new();
-            // Act
-            Result result = child.Execute();
-            // Assert
-            result.IntProperty.Should().Be(42);
-        }
-
-        [Test]
-        public void Execute_ShouldReturnResultObjectWithBoolTrue_WhenCalled()
-        {
-            // Arrange
-            Child child = new();
-            // Act
-            Result result = child.Execute();
-            // Assert
-            result.BoolProperty.Should().BeTrue();
-        }
-
-        [Test]
-        public void Execute_ShouldReturnResultObjectWithDoublePi_WhenCalled()
-        {
-            // Arrange
-            Child child = new();
-            // Act
-            Result result = child.Execute();
-            // Assert
-            result.DoubleProperty.Should().Be(3.14);
         }
     }
 }
