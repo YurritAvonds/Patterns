@@ -4,53 +4,32 @@ namespace Patterns.Fhir.ValueSet;
 
 public static class UriOidMapper
 {
-    public static string? FindCodeSystemUri(string oid)
+    public static string? FindCodeSystemUri(string oid) => FindUri(oid, typeof(CodeSystems));
+    public static string? FindValueSetUri(string oid) => FindUri(oid, typeof(ValueSets));
+    public static string? FindCodeSystemOid(string uri) => FindOid(uri, typeof(CodeSystems));
+    public static string? FindValueSetOid(string uri) => FindOid(uri, typeof(ValueSets));
+
+    private static string? FindUri(string oid, Type systemType)
     {
-        foreach (var codeSystemProperty in typeof(CodeSystems).GetFields(BindingFlags.Static | BindingFlags.Public))
+        foreach (var systemProperty in systemType.GetFields(BindingFlags.Static | BindingFlags.Public))
         {
-            if (codeSystemProperty.GetValue(null) is CodeSystem codeSystem
-                && codeSystem.Oid.Equals(oid, StringComparison.OrdinalIgnoreCase))
+            if (systemProperty.GetValue(null) is ISystem system
+                && system.Oid.Equals(oid, StringComparison.OrdinalIgnoreCase))
             {
-                return codeSystem.Uri;
+                return system.Uri;
             }
         }
         return null;
     }
 
-    public static string? FindCodeSystemOid(string uri)
+    private static string? FindOid(string uri, Type systemType)
     {
-        foreach (var codeSystemProperty in typeof(CodeSystems).GetFields(BindingFlags.Static | BindingFlags.Public))
+        foreach (var systemProperty in systemType.GetFields(BindingFlags.Static | BindingFlags.Public))
         {
-            if (codeSystemProperty.GetValue(null) is CodeSystem codeSystem
-                && codeSystem.Uri.Equals(uri, StringComparison.OrdinalIgnoreCase))
+            if (systemProperty.GetValue(null) is ISystem system
+                && system.Uri.Equals(uri, StringComparison.OrdinalIgnoreCase))
             {
-                return codeSystem.Oid;
-            }
-        }
-        return null;
-    }
-
-    public static string? FindValueSetUri(string oid)
-    {
-        foreach (var valueSetProperty in typeof(ValueSets).GetFields(BindingFlags.Static | BindingFlags.Public))
-        {
-            if (valueSetProperty.GetValue(null) is ValueSet valueSet
-                && valueSet.Oid.Equals(oid, StringComparison.OrdinalIgnoreCase))
-            {
-                return valueSet.Uri;
-            }
-        }
-        return null;
-    }
-
-    public static string? FindValueSetOid(string uri)
-    {
-        foreach (var valueSetProperty in typeof(ValueSets).GetFields(BindingFlags.Static | BindingFlags.Public))
-        {
-            if (valueSetProperty.GetValue(null) is ValueSet valueSet
-                && valueSet.Uri.Equals(uri, StringComparison.OrdinalIgnoreCase))
-            {
-                return valueSet.Oid;
+                return system.Oid;
             }
         }
         return null;
