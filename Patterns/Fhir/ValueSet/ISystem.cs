@@ -1,8 +1,7 @@
-﻿namespace Patterns.Fhir.ValueSet
+﻿namespace Patterns.Fhir.ValueSet;
+
+public interface ISystem
 {
-    public interface ISystem
-    {
-        string Uri { get; }
-        string Oid { get; }
-    }
+    string Uri { get; }
+    string Oid { get; }
 }
