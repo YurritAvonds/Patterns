@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Patterns.Fhir.ValueSet;
+﻿namespace Patterns.Fhir.ValueSet;
 
 public static class ValueSets
 {
