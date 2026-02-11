@@ -7,7 +7,7 @@ public static class CodeSystems
         "2.16.840.1.113883.4.642.4.1241")
     {
         Codes = [
-            "unknown"
+            new Code("unknown", "Unknown")
         ]
     };
 
@@ -16,14 +16,14 @@ public static class CodeSystems
         "2.16.840.1.113883.4.642.4.114")
     {
         Codes = [
-            "proposal",
-            "plan",
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-oder",
-            "instance-oder",
-            "option"
+            new Code("proposal", "Proposal"),
+            new Code("plan", "Plan"),
+            new Code("order", "Order"),
+            new Code("original-order", "Original Order"),
+            new Code("reflex-order", "Reflex Order"),
+            new Code("filler-oder", "Filler Oder"),
+            new Code("instance-oder", "Instance Oder"),
+            new Code("option", "Option")
         ]
     };
 }

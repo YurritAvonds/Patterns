@@ -17,7 +17,7 @@ public class ValueSet(string uri, string oid) : ISystem
         }
 
         var matchingCode = codeSystem.Codes.FirstOrDefault(code
-            => code.Equals(value, StringComparison.OrdinalIgnoreCase));
+            => code.Value.Equals(value, StringComparison.OrdinalIgnoreCase));
 
         return matchingCode != null;
     }
