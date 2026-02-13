@@ -6,7 +6,7 @@
 
         public virtual void Handle(Request request, Context context)
         {
-            nextHandler.Handle(request, context);
+            nextHandler?.Handle(request, context);
         }
     }
 }
