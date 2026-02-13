@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Patterns.InheritedModification;
+using Patterns.Personal.InheritedModification;
 
 namespace UnitTests.Personal.InheritedModification
 {

@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Patterns.Visitor;
+using Patterns.Standard.Visitor;
 
 namespace UnitTests.Standard.Visitor
 {
@@ -14,7 +14,7 @@ namespace UnitTests.Standard.Visitor
                 new VariantOne(),
                 new VariantTwo()
             };
-            var visitor = new Patterns.Visitor.Visitor();
+            var visitor = new Patterns.Standard.Visitor.Visitor();
             
             // Act
             foreach (var variant in variants)

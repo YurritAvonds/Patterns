@@ -1,4 +1,4 @@
-﻿namespace Patterns.InheritedBuilder.Base;
+﻿namespace Patterns.Personal.InheritedBuilder;
 
 public abstract class BaseBuilder<TBaseObject, TBaseBuilder>
     where TBaseObject : new()

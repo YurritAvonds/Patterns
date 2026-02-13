@@ -1,7 +1,6 @@
-﻿namespace Patterns.InheritedModification
+﻿namespace Patterns.Personal.InheritedModification;
+
+public interface IParent
 {
-    public interface IParent
-    {
-        public Result Execute();
-    }
+    public Result Execute();
 }

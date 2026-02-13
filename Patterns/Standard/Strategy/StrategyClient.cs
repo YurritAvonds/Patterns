@@ -1,4 +1,4 @@
-﻿namespace Patterns.Strategy;
+﻿namespace Patterns.Standard.Strategy;
 
 public class StrategyClient(IStrategy strategy)
 {

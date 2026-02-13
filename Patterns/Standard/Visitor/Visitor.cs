@@ -1,4 +1,4 @@
-﻿namespace Patterns.Visitor;
+﻿namespace Patterns.Standard.Visitor;
 
 public class Visitor : IVisitor
 {

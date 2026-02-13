@@ -1,4 +1,4 @@
-﻿namespace Patterns.InheritedBuilder.First;
+﻿namespace Patterns.Personal.InheritedBuilder;
 
 public class FirstObject
 {

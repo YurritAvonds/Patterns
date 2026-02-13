@@ -1,4 +1,4 @@
-﻿namespace Patterns.Factory;
+﻿namespace Patterns.Standard.Factory;
 
 public class SecondVariant(double commonParameter, string variantParameter) : IBaseType
 {

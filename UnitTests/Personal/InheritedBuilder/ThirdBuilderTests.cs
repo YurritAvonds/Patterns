@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
-using Patterns.InheritedBuilder.Second;
-using Patterns.InheritedBuilder.Third;
+using Patterns.Personal.InheritedBuilder;
 
 namespace UnitTests.Personal.InheritedBuilder;
 

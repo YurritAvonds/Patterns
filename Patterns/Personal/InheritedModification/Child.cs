@@ -1,4 +1,4 @@
-﻿namespace Patterns.InheritedModification;
+﻿namespace Patterns.Personal.InheritedModification;
 
 public class Child : Parent
 {

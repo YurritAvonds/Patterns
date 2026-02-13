@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Patterns.Singleton;
 
 namespace UnitTests.Standard.Singleton;
 
@@ -10,12 +9,12 @@ public class SingletonTests
     public void FirstMethod_ReturnsFirstProperty()
     {
         // Arrange
-        Singleton.GetInstance().FirstProperty = 42;
+        Patterns.Standard.Singleton.Singleton.GetInstance().FirstProperty = 42;
 
         // Act
-        Singleton.GetInstance().FirstProperty = 50;
+        Patterns.Standard.Singleton.Singleton.GetInstance().FirstProperty = 50;
 
         // Assert
-        Singleton.GetInstance().FirstProperty.Should().Be(50);
+        Patterns.Standard.Singleton.Singleton.GetInstance().FirstProperty.Should().Be(50);
     }
 }

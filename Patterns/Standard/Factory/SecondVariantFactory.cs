@@ -1,5 +1,5 @@
 ﻿
-namespace Patterns.Factory;
+namespace Patterns.Standard.Factory;
 
 public class SecondVariantFactory : VariantsFactory
 {

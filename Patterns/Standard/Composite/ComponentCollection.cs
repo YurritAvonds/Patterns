@@ -1,4 +1,4 @@
-﻿namespace Patterns.Composite;
+﻿namespace Patterns.Standard.Composite;
 
 public class ComponentCollection : IComponent
 {

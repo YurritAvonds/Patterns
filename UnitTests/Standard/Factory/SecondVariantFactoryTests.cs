@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Patterns.Factory;
+using Patterns.Standard.Factory;
 
 namespace UnitTests.Standard.Factory
 {

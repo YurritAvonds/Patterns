@@ -1,6 +1,4 @@
-﻿using Patterns.InheritedBuilder.Base;
-
-namespace Patterns.InheritedBuilder.First;
+﻿namespace Patterns.Personal.InheritedBuilder;
 
 public class FirstBuilder : FirstBuilder<FirstObject, FirstBuilder>
 {

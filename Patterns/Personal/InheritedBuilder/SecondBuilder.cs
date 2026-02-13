@@ -1,6 +1,4 @@
-﻿using Patterns.InheritedBuilder.First;
-
-namespace Patterns.InheritedBuilder.Second;
+﻿namespace Patterns.Personal.InheritedBuilder;
 
 public class SecondBuilder : SecondBuilder<SecondObject, SecondBuilder>
 {

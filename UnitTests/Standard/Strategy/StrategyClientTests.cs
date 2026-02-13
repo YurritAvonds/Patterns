@@ -1,6 +1,5 @@
-﻿using Patterns.Strategy;
-using NUnit.Framework;
-using FluentAssertions;
+﻿using FluentAssertions;
+using Patterns.Standard.Strategy;
 
 namespace UnitTests.Standard.Strategy
 {
