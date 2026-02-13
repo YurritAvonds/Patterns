@@ -1,18 +1,18 @@
 ﻿using FluentAssertions;
 using Patterns.Factory;
 
-namespace UnitTests.Factory
+namespace UnitTests.Standard.Factory
 {
-    public class SecondVariantFactoryTests
+    public class FirstVariantFactoryTests
     {
         [Test]
         public void SharedMethod_AllVariants_ReturnsExpectedResults()
         {
             // Arrange
-            var factory = new SecondVariantFactory();
 
             // Act
-
+            var factory = new FirstVariantFactory();
+            
             // Assert
             var expected = new[] { false, false, true };
             var i = 0;

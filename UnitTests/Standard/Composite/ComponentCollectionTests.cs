@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Patterns.Composite;
 
-namespace UnitTests.Composite;
+namespace UnitTests.Standard.Composite;
 
 [TestFixture]
 internal class ComponentCollectionTests

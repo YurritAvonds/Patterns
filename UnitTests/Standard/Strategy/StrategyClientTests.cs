@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using FluentAssertions;
 
-namespace UnitTests.Strategy
+namespace UnitTests.Standard.Strategy
 {
     internal class StrategyClientTests
     {

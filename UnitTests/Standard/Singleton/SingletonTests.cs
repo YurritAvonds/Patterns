@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Patterns.Singleton;
 
-namespace UnitTests.Composite;
+namespace UnitTests.Standard.Singleton;
 
 [TestFixture]
 public class SingletonTests

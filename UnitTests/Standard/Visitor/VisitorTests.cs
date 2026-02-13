@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Patterns.Visitor;
 
-namespace UnitTests.Visitor
+namespace UnitTests.Standard.Visitor
 {
     internal class VisitorTests
     {
