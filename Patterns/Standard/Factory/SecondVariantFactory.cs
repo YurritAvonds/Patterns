@@ -1,10 +1,10 @@
 ﻿
+using Patterns.Standard.AbstractFactory;
+
 namespace Patterns.Standard.Factory;
 
-public class SecondVariantFactory : VariantsFactory
+public class SecondVariantFactory : VariantsFactory, IFactory
 {
-	readonly List<SecondVariant> secondVariantPackages = [];
-
 	public SecondVariantFactory()
 	{
 		AddVariant(new SecondVariant(5.5, "Gamma"));
@@ -14,6 +14,6 @@ public class SecondVariantFactory : VariantsFactory
 
 	public override SecondVariant this[int index]
 	{
-		get { return secondVariantPackages[index]; }
+		get { return (SecondVariant)Variants[index]; }
 	}
 }

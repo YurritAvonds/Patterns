@@ -2,7 +2,7 @@
 
 public abstract class VariantsFactory
 {
-	readonly List<IBaseType> Variants;
+	protected List<IBaseType> Variants { get; private set; }
 
 	public VariantsFactory()
 	{ 
