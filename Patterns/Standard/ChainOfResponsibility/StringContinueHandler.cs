@@ -4,16 +4,15 @@
     {
         override public void Handle(Request request, Context context)
         {
-            if (CanHandle(request))
+            if (request?.StringValue != null)
             {
                 context.HasValidString = request.StringValue.Length > 10;
             }
-            base.Handle(request, context);
-        }
 
-        private bool CanHandle(Request request)
-        {
-            return request?.StringValue != null;
+            if (request != null)
+            {
+                base.Handle(request, context);
+            }
         }
     }
 }
