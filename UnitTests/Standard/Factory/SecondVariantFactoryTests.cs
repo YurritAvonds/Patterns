@@ -14,7 +14,7 @@ namespace UnitTests.Standard.Factory
             // Act
 
             // Assert
-            var expected = new[] { false, false, true };
+            var expected = new[] { true, true, false };
             var i = 0;
             foreach (IBaseType variant in factory)
             {
