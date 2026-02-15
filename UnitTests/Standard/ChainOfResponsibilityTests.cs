@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Patterns.Standard.ChainOfResponsibility;
 
-namespace UnitTests.Standard.ChainOfResponsibility
+namespace UnitTests.Standard
 {
     internal class ChainOfResponsibilityTests
     {

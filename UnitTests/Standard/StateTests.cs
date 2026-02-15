@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Patterns.Standard.State;
 
-namespace UnitTests.Standard.State;
+namespace UnitTests.Standard;
 
 internal class StateTests
 {

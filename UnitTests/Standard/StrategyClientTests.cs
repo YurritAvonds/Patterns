@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Patterns.Standard.Strategy;
 
-namespace UnitTests.Standard.Strategy
+namespace UnitTests.Standard
 {
     internal class StrategyClientTests
     {

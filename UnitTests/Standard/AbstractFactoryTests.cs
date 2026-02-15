@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Patterns.Standard.AbstractFactory;
 
-namespace UnitTests.Standard.AbstractFactory;
+namespace UnitTests.Standard;
 
 internal class AbstractFactoryTests
 {

@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-namespace UnitTests.Standard.Builder;
+namespace UnitTests.Standard;
 
 public class BuilderTests
 {
