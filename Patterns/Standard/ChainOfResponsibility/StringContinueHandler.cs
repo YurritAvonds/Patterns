@@ -1,6 +1,6 @@
 ﻿namespace Patterns.Standard.ChainOfResponsibility
 {
-    public class StringContinueHandler(IHandler nextHandler) : BaseHandler(nextHandler)
+    public class StringContinueHandler(IHandler? nextHandler) : BaseHandler(nextHandler)
     {
         override public void Handle(Request request, Context context)
         {
