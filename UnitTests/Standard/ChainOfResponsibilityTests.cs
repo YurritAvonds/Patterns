@@ -24,6 +24,7 @@ namespace UnitTests.Standard
             context.HasValidInteger.Should().BeTrue();
         }
 
+        [Test]
         public void Chain_ShouldReturnContextWithOnlyIntegerCheckTrue_WhenStringIsInvalid()
         {
             // Arrange
@@ -42,6 +43,7 @@ namespace UnitTests.Standard
             context.HasValidInteger.Should().BeTrue();
         }
 
+        [Test]
         public void Chain_ShouldReturnContextWithIntegerCheckFalse_WhenIntegerIsInvalid()
         {
             // Arrange
@@ -60,6 +62,7 @@ namespace UnitTests.Standard
             context.HasValidInteger.Should().BeFalse();
         }
 
+        [Test]
         public void Chain_ShouldStopEarly_WhenStringCheckFails()
         {
             // Arrange
