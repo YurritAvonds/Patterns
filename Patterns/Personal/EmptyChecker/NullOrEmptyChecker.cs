@@ -7,6 +7,11 @@ namespace Patterns.Personal.EmptyChecker
     {
         public bool IsEmpty<T>(object checkedObject)
         {
+            if (checkedObject == null)
+            {
+                return true;
+            }
+
             foreach (var property in typeof(T).GetProperties())
             {
                 object? propertyValue = property.GetValue(checkedObject);
