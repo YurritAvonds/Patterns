@@ -6,6 +6,7 @@ namespace UnitTests.Personal.EmptyCheckerTests;
 internal class EmptyCheckerTests
 {
     [Test]
+    [Category("Empty")]
     public void Parent_Empty()
     {
         // Arrange
@@ -20,6 +21,7 @@ internal class EmptyCheckerTests
     }
 
     [Test]
+    [Category("Empty")]
     public void Child_Empty()
     {
         // Arrange
@@ -34,6 +36,61 @@ internal class EmptyCheckerTests
     }
 
     [Test]
+    [Category("Empty")]
+    public void Parent_EmptyWithInitializedCollection()
+    {
+        // Arrange
+        var emptyChecker = new NullOrEmptyChecker();
+        var parent = new Parent(emptyChecker)
+        {
+            ParentCollection = []
+        };
+
+        // Act
+        bool result = parent.IsEmpty();
+
+        // Assert
+        result.Should().BeTrue();
+    }
+
+    [Test]
+    [Category("Empty")]
+    public void Child_EmptyWithInitializedCollection()
+    {
+        // Arrange
+        var emptyChecker = new NullOrEmptyChecker();
+        var child = new Child(emptyChecker)
+        {
+            ChildCollection = []
+        };
+
+        // Act
+        bool result = child.IsEmpty();
+
+        // Assert
+        result.Should().BeTrue();
+    }
+
+    [Test]
+    [Category("Empty")]
+    public void Child_EmptyWithInitializedParentCollection()
+    {
+        // Arrange
+        var emptyChecker = new NullOrEmptyChecker();
+        var child = new Child(emptyChecker)
+        {
+            ParentCollection = []
+        };
+
+        // Act
+        bool result = child.IsEmpty();
+
+        // Assert
+        result.Should().BeTrue();
+    }
+
+    [Test]
+    [Category("Not Empty")]
     public void Parent_NonEmptyString()
     {
         // Arrange
@@ -51,6 +108,7 @@ internal class EmptyCheckerTests
     }
 
     [Test]
+    [Category("Not Empty")]
     public void Child_NonEmptyString()
     {
         // Arrange
@@ -68,6 +126,7 @@ internal class EmptyCheckerTests
     }
 
     [Test]
+    [Category("Not Empty")]
     public void Child_NonEmptyParentString()
     {
         // Arrange
@@ -75,6 +134,60 @@ internal class EmptyCheckerTests
         var child = new Child(emptyChecker)
         {
             ParentString = "Non-empty string"
+        };
+
+        // Act
+        bool result = child.IsEmpty();
+
+        // Assert
+        result.Should().BeFalse();
+    }
+
+    [Test]
+    [Category("Not Empty")]
+    public void Parent_NonEmptyCollection()
+    {
+        // Arrange
+        var emptyChecker = new NullOrEmptyChecker();
+        var parent = new Parent(emptyChecker)
+        {
+            ParentCollection = ["Item 1", "Item 2"]
+        };
+
+        // Act
+        bool result = parent.IsEmpty();
+
+        // Assert
+        result.Should().BeFalse();
+    }
+
+    [Test]
+    [Category("Not Empty")]
+    public void Child_NonEmptyCollection()
+    {
+        // Arrange
+        var emptyChecker = new NullOrEmptyChecker();
+        var child = new Child(emptyChecker)
+        {
+            ChildCollection = ["Item 1", "Item 2"]
+        };
+
+        // Act
+        bool result = child.IsEmpty();
+
+        // Assert
+        result.Should().BeFalse();
+    }
+
+    [Test]
+    [Category("Not Empty")]
+    public void Child_NonEmptyParentCollection()
+    {
+        // Arrange
+        var emptyChecker = new NullOrEmptyChecker();
+        var child = new Child(emptyChecker)
+        {
+            ParentCollection = ["Item 1", "Item 2"]
         };
 
         // Act

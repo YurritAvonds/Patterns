@@ -4,6 +4,7 @@
     {
         public string? ParentString { get; set; }
         public int? ParentInteger { get; set; }
+        public ICollection<string>? ParentCollection { get; set; }
 
         public virtual bool IsEmpty() => emptyChecker.IsEmpty<Parent>(this);
     }
