@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Patterns.Fhir.ValueSet;
 
-namespace UnitTests.Fhir.ValueSet;
+namespace UnitTests.Fhir;
 
 internal class ValueSetTests
 {
