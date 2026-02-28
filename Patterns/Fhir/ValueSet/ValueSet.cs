@@ -8,7 +8,7 @@ public class ValueSet(string uri, string oid) : ISystem
 
     public bool ContainsCode(string system, string value)
     {
-        var codeSystem = Codes.FirstOrDefault(codeSystem 
+        var codeSystem = Codes.FirstOrDefault(codeSystem
             => codeSystem.Uri.Equals(system, StringComparison.OrdinalIgnoreCase));
 
         if (codeSystem == null)

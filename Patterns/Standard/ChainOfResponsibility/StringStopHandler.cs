@@ -1,13 +1,12 @@
-﻿namespace Patterns.Standard.ChainOfResponsibility
+﻿namespace Patterns.Standard.ChainOfResponsibility;
+
+public class StringStopHandler(IHandler? nextHandler) : BaseHandler(nextHandler)
 {
-    public class StringStopHandler(IHandler? nextHandler) : BaseHandler(nextHandler)
+    override public void Handle(Request request, Context context)
     {
-        override public void Handle(Request request, Context context)
+        if (request?.StringValue != null)
         {
-            if (request?.StringValue != null)
-            {
-                context.HasValidString = request.StringValue.Length > 10;
-            }
+            context.HasValidString = request.StringValue.Length > 10;
         }
     }
 }

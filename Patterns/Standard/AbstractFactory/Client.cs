@@ -20,7 +20,7 @@ public class Client
             throw new InvalidOperationException("Factory not initialized");
         }
 
-        for (int i = 0; i < 3; i++)
+        for (var i = 0; i < 3; i++)
         {
             Results.Add(factory[i]);
         }

@@ -1,8 +1,7 @@
-﻿namespace Patterns.Fhir.ValueSet
+﻿namespace Patterns.Fhir.ValueSet;
+
+public record Code(string Value, string Display)
 {
-    public record Code(string value, string display)
-    {
-        public string Value { get; private set; } = value;
-        public string Display { get; private set; } = display;
-    }
+    public string Value { get; private set; } = Value;
+    public string Display { get; private set; } = Display;
 }

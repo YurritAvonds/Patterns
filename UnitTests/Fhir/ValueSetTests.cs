@@ -19,7 +19,7 @@ internal class ValueSetTests
     public void Contains_ShouldReturnTrue_WhenValueSetContainsCode(string system, string code, bool expectedResult)
     {
         // Arrange
-        
+
         // Act
         var result = ValueSets.TaskIntent.ContainsCode(system, code);
 

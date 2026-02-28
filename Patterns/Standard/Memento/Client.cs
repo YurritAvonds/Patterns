@@ -31,7 +31,7 @@ public class Client(IOriginator originator)
         }
 
         // Get the last saved state and remove it from history
-        Originator.Memento lastMemento = Pop();
+        var lastMemento = Pop();
 
         // Restore the originator's state
         originator.RestoreMemento(lastMemento);

@@ -2,6 +2,7 @@
 
 public class Child(IEmptyChecker emptyChecker) : Parent(emptyChecker)
 {
+    private readonly IEmptyChecker emptyChecker = emptyChecker;
     public string? ChildString { get; set; }
     public int? ChildInteger { get; set; }
     public ICollection<string>? ChildCollection { get; set; }

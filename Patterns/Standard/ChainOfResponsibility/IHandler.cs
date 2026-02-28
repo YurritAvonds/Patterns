@@ -1,7 +1,6 @@
-﻿namespace Patterns.Standard.ChainOfResponsibility
+﻿namespace Patterns.Standard.ChainOfResponsibility;
+
+public interface IHandler
 {
-    public interface IHandler
-    {
-        public void Handle(Request request, Context context);
-    }
+    public void Handle(Request request, Context context);
 }

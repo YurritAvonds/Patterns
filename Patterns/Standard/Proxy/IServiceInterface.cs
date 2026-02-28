@@ -1,7 +1,6 @@
-﻿namespace Patterns.Standard.Proxy
+﻿namespace Patterns.Standard.Proxy;
+
+internal interface IServiceInterface
 {
-    internal interface IServiceInterface
-    {
-        string Operate(int integerValue);
-    }
+    string Operate(int integerValue);
 }

@@ -10,11 +10,11 @@ public class CompositeTests
     public void Component_FirstMethod_ReturnsFirstProperty()
     {
         // Arrange
-        double expected = 1.2345;
+        var expected = 1.2345;
         var component = new Component(expected, "ignored");
 
         // Act
-        double actual = component.FirstMethod();
+        var actual = component.FirstMethod();
 
         // Assert
         actual.Should().Be(expected);
@@ -24,11 +24,11 @@ public class CompositeTests
     public void Component_SecondMethod_ReturnsSecondProperty()
     {
         // Arrange
-        string expected = "hello world";
+        var expected = "hello world";
         var component = new Component(0.0, expected);
 
         // Act
-        string actual = component.SecondMethod();
+        var actual = component.SecondMethod();
 
         // Assert
         actual.Should().Be(expected);

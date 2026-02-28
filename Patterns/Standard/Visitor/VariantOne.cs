@@ -3,12 +3,8 @@
 public class VariantOne : IBase
 {
     public void Accept(IVisitor visitor)
-    {
-        visitor.Visit(this);
-    }
+        => visitor.Visit(this);
 
     public string SomeMethod(string input)
-    {
-        return $"VariantOne: {input}";
-    }
+        => $"VariantOne: {input}";
 }

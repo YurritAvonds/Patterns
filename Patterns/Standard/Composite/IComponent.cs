@@ -2,6 +2,6 @@
 
 public interface IComponent
 {
-	double FirstMethod();
-	string SecondMethod();
+    double FirstMethod();
+    string SecondMethod();
 }

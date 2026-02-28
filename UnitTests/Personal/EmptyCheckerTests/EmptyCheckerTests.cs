@@ -12,9 +12,9 @@ internal class EmptyCheckerTests
         // Arrange
         var emptyChecker = new NullOrEmptyChecker();
         var parent = new Parent(emptyChecker);
-        
+
         // Act
-        bool result = parent.IsEmpty();
+        var result = parent.IsEmpty();
 
         // Assert
         result.Should().BeTrue();
@@ -29,7 +29,7 @@ internal class EmptyCheckerTests
         var child = new Child(emptyChecker);
 
         // Act
-        bool result = child.IsEmpty();
+        var result = child.IsEmpty();
 
         // Assert
         result.Should().BeTrue();
@@ -47,7 +47,7 @@ internal class EmptyCheckerTests
         };
 
         // Act
-        bool result = parent.IsEmpty();
+        var result = parent.IsEmpty();
 
         // Assert
         result.Should().BeTrue();
@@ -65,7 +65,7 @@ internal class EmptyCheckerTests
         };
 
         // Act
-        bool result = child.IsEmpty();
+        var result = child.IsEmpty();
 
         // Assert
         result.Should().BeTrue();
@@ -83,7 +83,7 @@ internal class EmptyCheckerTests
         };
 
         // Act
-        bool result = child.IsEmpty();
+        var result = child.IsEmpty();
 
         // Assert
         result.Should().BeTrue();
@@ -101,7 +101,7 @@ internal class EmptyCheckerTests
         };
 
         // Act
-        bool result = parent.IsEmpty();
+        var result = parent.IsEmpty();
 
         // Assert
         result.Should().BeFalse();
@@ -119,7 +119,7 @@ internal class EmptyCheckerTests
         };
 
         // Act
-        bool result = child.IsEmpty();
+        var result = child.IsEmpty();
 
         // Assert
         result.Should().BeFalse();
@@ -137,7 +137,7 @@ internal class EmptyCheckerTests
         };
 
         // Act
-        bool result = child.IsEmpty();
+        var result = child.IsEmpty();
 
         // Assert
         result.Should().BeFalse();
@@ -155,7 +155,7 @@ internal class EmptyCheckerTests
         };
 
         // Act
-        bool result = parent.IsEmpty();
+        var result = parent.IsEmpty();
 
         // Assert
         result.Should().BeFalse();
@@ -173,7 +173,7 @@ internal class EmptyCheckerTests
         };
 
         // Act
-        bool result = child.IsEmpty();
+        var result = child.IsEmpty();
 
         // Assert
         result.Should().BeFalse();
@@ -191,7 +191,7 @@ internal class EmptyCheckerTests
         };
 
         // Act
-        bool result = child.IsEmpty();
+        var result = child.IsEmpty();
 
         // Assert
         result.Should().BeFalse();

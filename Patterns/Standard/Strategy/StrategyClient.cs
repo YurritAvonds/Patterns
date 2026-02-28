@@ -3,12 +3,8 @@
 public class StrategyClient(IStrategy strategy)
 {
     public double ExecuteFirstMethod(double firstParameter, double secondParameter)
-	{
-		return strategy.FirstMethod(firstParameter, secondParameter);
-	}
+        => strategy.FirstMethod(firstParameter, secondParameter);
 
-	public string ExecuteSecondMethod(string firstParameter)
-	{
-		return strategy.SecondMethod(firstParameter);
-    }
+    public string ExecuteSecondMethod(string firstParameter)
+        => strategy.SecondMethod(firstParameter);
 }

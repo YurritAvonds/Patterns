@@ -1,11 +1,10 @@
-﻿namespace Patterns.Standard.State
+﻿namespace Patterns.Standard.State;
+
+public class StateTwo : BaseState, IState
 {
-    public class StateTwo : BaseState, IState
+    public string GetString()
     {
-        public string GetString()
-        {
-            Continue(new StateThree());
-            return "Two";
-        }
+        Continue(new StateThree());
+        return "Two";
     }
 }

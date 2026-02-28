@@ -1,40 +1,33 @@
 ﻿namespace Patterns.Standard.Composite;
 
-public class ComponentCollection : IComponent
+public class ComponentCollection(double firstParameter, string secondParameter) : IComponent
 {
-	double FirstProperty{ get; set; }
-	string SecondProperty { get; set; }
-	List<IComponent> Components { get; set; }
+    double FirstProperty { get; set; } = firstParameter;
+    string SecondProperty { get; set; } = secondParameter;
+    List<IComponent> Components { get; set; } = [];
 
-	public ComponentCollection(double firstParameter, string secondParameter)
-	{ 
-		FirstProperty = firstParameter;
-		SecondProperty = secondParameter;
-		Components = [];
-	}
+    public void AddComponent(IComponent component)
+    {
+        Components.Add(component);
+    }
 
-	public void AddComponent(IComponent component)
-	{
-		Components.Add(component);
-	}
+    public double FirstMethod()
+    {
+        var total = FirstProperty;
+        foreach (var component in Components)
+        {
+            total += component.FirstMethod();
+        }
+        return total;
+    }
 
-	public double FirstMethod()
-	{
-		double total = FirstProperty;
-		foreach (IComponent component in Components)
-		{
-			total += component.FirstMethod();
-		}
-		return total;
-	}
-
-	public string SecondMethod()
-	{
-		string combined = SecondProperty;
-		foreach (IComponent component in Components)
-		{
-			combined = $"{combined}|{component.SecondMethod()}";
-		}
-		return combined;
-	}
+    public string SecondMethod()
+    {
+        var combined = SecondProperty;
+        foreach (var component in Components)
+        {
+            combined = $"{combined}|{component.SecondMethod()}";
+        }
+        return combined;
+    }
 }

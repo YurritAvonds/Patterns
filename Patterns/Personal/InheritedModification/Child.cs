@@ -4,7 +4,7 @@ public class Child : Parent
 {
     public override Result Execute()
     {
-        Result result = base.Execute();
+        var result = base.Execute();
 
         result.StringProperty = "Child";
 

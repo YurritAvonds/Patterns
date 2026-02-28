@@ -1,8 +1,7 @@
-﻿namespace Patterns.Standard.State
+﻿namespace Patterns.Standard.State;
+
+public interface IState
 {
-    public interface IState
-    {
-        public string GetString();
-        public void SetContext(Context context);
-    }
+    public string GetString();
+    public void SetContext(Context context);
 }

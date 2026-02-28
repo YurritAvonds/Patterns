@@ -12,7 +12,7 @@ internal class UriOidMapperTests
         // Arrange
 
         // Act
-        string? actualUri = UriOidMapper.FindCodeSystemUri(oid);
+        var actualUri = UriOidMapper.FindCodeSystemUri(oid);
 
         // Assert
         actualUri.Should().NotBeNull();
@@ -29,7 +29,7 @@ internal class UriOidMapperTests
         // Arrange
 
         // Act
-        string? actualUri = UriOidMapper.FindCodeSystemUri(oid);
+        var actualUri = UriOidMapper.FindCodeSystemUri(oid);
 
         // Assert
         actualUri.Should().BeNull();
@@ -42,7 +42,7 @@ internal class UriOidMapperTests
         // Arrange
 
         // Act
-        string? actualOid = UriOidMapper.FindCodeSystemOid(uri);
+        var actualOid = UriOidMapper.FindCodeSystemOid(uri);
 
         // Assert
         actualOid.Should().NotBeNull();
@@ -59,7 +59,7 @@ internal class UriOidMapperTests
         // Arrange
 
         // Act
-        string? actualOid = UriOidMapper.FindCodeSystemOid(uri);
+        var actualOid = UriOidMapper.FindCodeSystemOid(uri);
 
         // Assert
         actualOid.Should().BeNull();
@@ -71,7 +71,7 @@ internal class UriOidMapperTests
         // Arrange
 
         // Act
-        string? actualUri = UriOidMapper.FindValueSetUri(oid);
+        var actualUri = UriOidMapper.FindValueSetUri(oid);
 
         // Assert
         actualUri.Should().NotBeNull();
@@ -88,7 +88,7 @@ internal class UriOidMapperTests
         // Arrange
 
         // Act
-        string? actualUri = UriOidMapper.FindValueSetUri(oid);
+        var actualUri = UriOidMapper.FindValueSetUri(oid);
 
         // Assert
         actualUri.Should().BeNull();
@@ -100,7 +100,7 @@ internal class UriOidMapperTests
         // Arrange
 
         // Act
-        string? actualOid = UriOidMapper.FindValueSetOid(uri);
+        var actualOid = UriOidMapper.FindValueSetOid(uri);
 
         // Assert
         actualOid.Should().NotBeNull();
@@ -117,7 +117,7 @@ internal class UriOidMapperTests
         // Arrange
 
         // Act
-        string? actualOid = UriOidMapper.FindValueSetOid(uri);
+        var actualOid = UriOidMapper.FindValueSetOid(uri);
 
         // Assert
         actualOid.Should().BeNull();

@@ -6,6 +6,6 @@ internal class HumanNameValueSets
     "http://hl7.org/fhir/ValueSet/name-use",
     "2.16.840.1.113883.4.642.3.65")
     {
-        Codes = [ HumanNameCodeSystems.NameUse ]
+        Codes = [HumanNameCodeSystems.NameUse]
     };
 }

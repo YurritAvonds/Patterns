@@ -1,7 +1,6 @@
-﻿namespace Patterns.Standard.State
+﻿namespace Patterns.Standard.State;
+
+public class StateThree : BaseState, IState
 {
-    public class StateThree : BaseState, IState
-    {
-        public string GetString() => "Three";
-    }
+    public string GetString() => "Three";
 }

@@ -3,12 +3,8 @@
 public class SecondStrategy : IStrategy
 {
     public double FirstMethod(double firstParameter, double secondParameter)
-    {
-        return firstParameter * secondParameter;
-    }
+        => firstParameter * secondParameter;
 
-	public string SecondMethod(string firstParamater)
-	{
-        return $"Second Strategy received parameter {firstParamater}.";
-    }
+    public string SecondMethod(string firstParamater)
+        => $"Second Strategy received parameter {firstParamater}.";
 }

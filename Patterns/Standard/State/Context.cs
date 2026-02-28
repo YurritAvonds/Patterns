@@ -1,11 +1,10 @@
-﻿namespace Patterns.Standard.State
+﻿namespace Patterns.Standard.State;
+
+public class Context(IState InitialState)
 {
-    public class Context(IState InitialState)
-    {
-        private IState state = InitialState;
+    private IState state = InitialState;
 
-        public void ChangeState(IState newState) => state = newState;
+    public void ChangeState(IState newState) => state = newState;
 
-        public string GetString() => state.GetString();
-    }
+    public string GetString() => state.GetString();
 }

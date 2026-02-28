@@ -1,8 +1,7 @@
-﻿namespace Patterns.Standard.ChainOfResponsibility
+﻿namespace Patterns.Standard.ChainOfResponsibility;
+
+public class Context
 {
-    public class Context
-    {
-        public bool? HasValidString { get; set; }
-        public bool? HasValidInteger { get; set; }
-    }
+    public bool? HasValidString { get; set; }
+    public bool? HasValidInteger { get; set; }
 }
