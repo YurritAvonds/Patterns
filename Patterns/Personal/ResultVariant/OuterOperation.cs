@@ -4,9 +4,9 @@ namespace Patterns.Personal.ResultVariant;
 
 public class OuterOperation
 {
-    public Result<int?> DoSomething(int? integerParameter)
+    public static Result<int?> DoSomething(int? integerParameter)
     {
-        var innerResult = new InnerOperation().DoSomething(integerParameter);
+        var innerResult = InnerOperation.DoSomething(integerParameter);
 
         var outerResult = integerParameter switch
         {

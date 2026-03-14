@@ -4,7 +4,7 @@ namespace Patterns.Personal.ResultVariant;
 
 internal class InnerOperation
 {
-    public Result<int?> DoSomething(int? integerParameter)
+    public static Result<int?> DoSomething(int? integerParameter)
     {
         if (integerParameter is null)
         {

@@ -12,10 +12,9 @@ internal class ResultVariantTests
     public void Result_Success(int inputValue)
     {
         // Arrange
-        var outerOperation = new OuterOperation();
 
         // Act
-        var result = outerOperation.DoSomething(inputValue);
+        var result = OuterOperation.DoSomething(inputValue);
 
         // Assert
         result.IsSuccess.Should().BeTrue();
@@ -28,10 +27,9 @@ internal class ResultVariantTests
     public void Result_TooLow(int inputValue)
     {
         // Arrange
-        var outerOperation = new OuterOperation();
 
         // Act
-        var result = outerOperation.DoSomething(inputValue);
+        var result = OuterOperation.DoSomething(inputValue);
 
         // Assert
         result.IsSuccess.Should().BeFalse();
@@ -46,10 +44,9 @@ internal class ResultVariantTests
     public void Result_TooLow_And_Odd(int inputValue)
     {
         // Arrange
-        var outerOperation = new OuterOperation();
 
         // Act
-        var result = outerOperation.DoSomething(inputValue);
+        var result = OuterOperation.DoSomething(inputValue);
 
         // Assert
         result.IsSuccess.Should().BeFalse();
@@ -65,10 +62,9 @@ internal class ResultVariantTests
     public void Result_TooHigh(int inputValue)
     {
         // Arrange
-        var outerOperation = new OuterOperation();
 
         // Act
-        var result = outerOperation.DoSomething(inputValue);
+        var result = OuterOperation.DoSomething(inputValue);
 
         // Assert
         result.IsSuccess.Should().BeFalse();
@@ -83,10 +79,9 @@ internal class ResultVariantTests
     public void Result_TooHigh_And_Odd(int inputValue)
     {
         // Arrange
-        var outerOperation = new OuterOperation();
 
         // Act
-        var result = outerOperation.DoSomething(inputValue);
+        var result = OuterOperation.DoSomething(inputValue);
 
         // Assert
         result.IsSuccess.Should().BeFalse();
@@ -101,10 +96,9 @@ internal class ResultVariantTests
     public void Result_Null()
     {
         // Arrange
-        var outerOperation = new OuterOperation();
 
         // Act
-        var result = outerOperation.DoSomething(null);
+        var result = OuterOperation.DoSomething(null);
 
         // Assert
         result.IsSuccess.Should().BeFalse();
@@ -119,10 +113,9 @@ internal class ResultVariantTests
     public void Result_Odd(int inputValue)
     {
         // Arrange
-        var outerOperation = new OuterOperation();
 
         // Act
-        var result = outerOperation.DoSomething(inputValue);
+        var result = OuterOperation.DoSomething(inputValue);
 
         // Assert
         result.IsSuccess.Should().BeFalse();
