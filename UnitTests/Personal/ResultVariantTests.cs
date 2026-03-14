@@ -2,7 +2,7 @@
 using Patterns.Standard.Result;
 using OuterOperation = Patterns.Personal.ResultVariant.OuterOperation;
 
-namespace UnitTests.Standard;
+namespace UnitTests.Personal;
 
 internal class ResultVariantTests
 {
