@@ -4,12 +4,16 @@ internal class InnerOperation
 {
     public Result<int?> DoSomething(int? integerParameter)
     {
-        return integerParameter switch
+        if (integerParameter is null)
         {
-            null => (Result<int?>)Errors.InputNull,
-            > 100 => (Result<int?>)Errors.InputTooHigh,
-            < 0 => (Result<int?>)Errors.InputTooLow,
-            _ => (Result<int?>)integerParameter.Value,
-        };
+            return Errors.InputNull;
+        }
+
+        if (integerParameter % 2 != 0)
+        {
+            return Errors.OddNumber;
+        }
+
+        return (Result<int?>)integerParameter.Value;
     }
 }

@@ -4,6 +4,6 @@ public enum ErrorType
 {
     InputTooHigh,
     InputTooLow,
-    InputNull
-    //...
+    InputNull,
+    OddNumber
 }

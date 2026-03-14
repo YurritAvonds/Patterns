@@ -14,8 +14,8 @@ public class OuterOperation
         return integerParameter switch
         {
             null => (Result<int?>)Errors.InputNull,
-            > 75 => (Result<int?>)Errors.InputTooHigh,
-            < 25 => (Result<int?>)Errors.InputTooLow,
+            > 100 => (Result<int?>)Errors.InputTooHigh,
+            < 0 => (Result<int?>)Errors.InputTooLow,
             _ => (Result<int?>)integerParameter.Value,
         };
     }
