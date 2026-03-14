@@ -1,13 +1,32 @@
 ﻿using FluentAssertions;
 using Patterns.Personal.InheritedModification;
 
-namespace UnitTests.Personal.InheritedModification;
+namespace UnitTests.Personal;
 
-internal class ParentTests
+internal class InheritedModificationChildTests : InheritedModificationParentTests
+{
+    public InheritedModificationChildTests()
+    {
+        Creator = new Child();
+    }
+
+    [Test]
+    public override void Execute_ShouldReturnResultObjectWithParentString_WhenCalled()
+    {
+        // Arrange
+
+        // Act
+        var result = Creator.Execute();
+        // Assert
+        result.StringProperty.Should().Be("Child");
+    }
+}
+
+internal class InheritedModificationParentTests
 {
     protected IParent Creator;
 
-    public ParentTests()
+    public InheritedModificationParentTests()
     {
         Creator = new Parent();
     }

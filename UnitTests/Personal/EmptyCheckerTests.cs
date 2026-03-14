@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Patterns.Personal.EmptyChecker;
 
-namespace UnitTests.Personal.EmptyCheckerTests;
+namespace UnitTests.Personal;
 
 internal class EmptyCheckerTests
 {
