@@ -27,7 +27,7 @@ jobs:
     - name: Run Unit Tests and report Test Coverage
       run: dotnet test \
               --no-build \
-              --verbosity normal
+              --verbosity normal \
               --collect:"XPlat Code Coverage" \
               -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
     - name: Publish code coverage results
