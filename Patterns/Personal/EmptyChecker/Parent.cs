@@ -1,5 +1,9 @@
 ﻿namespace Patterns.Personal.EmptyChecker;
 
+/// <summary>
+/// Parent class that can check whether it is empty using the provided IEmptyChecker implementation.
+/// </summary>
+/// <param name="emptyChecker"></param>
 public class Parent(IEmptyChecker emptyChecker)
 {
     private readonly IEmptyChecker emptyChecker = emptyChecker;
@@ -7,5 +11,9 @@ public class Parent(IEmptyChecker emptyChecker)
     public int? ParentInteger { get; set; }
     public ICollection<string>? ParentCollection { get; set; }
 
+    /// <summary>
+    /// Checks whether the Parent object is empty by using the provided IEmptyChecker implementation.
+    /// </summary>
+    /// <returns></returns>
     public virtual bool IsEmpty() => emptyChecker.IsEmpty<Parent>(this);
 }
