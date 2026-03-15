@@ -20,7 +20,5 @@ jobs:
       uses: actions/setup-dotnet@v5
       with:
         dotnet-version: 9.0.x
-    - name: Run Unit Tests and report Test Coverage
-      run: dotnet test \
-              --no-build \
-              --verbosity normal
+    - name: Run Unit Tests
+      run: dotnet test --no-build --verbosity normal
