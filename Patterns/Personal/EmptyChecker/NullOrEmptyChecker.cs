@@ -1,39 +1,37 @@
 ﻿using System.Collections;
-using System.Reflection;
 
-namespace Patterns.Personal.EmptyChecker
+namespace Patterns.Personal.EmptyChecker;
+
+public class NullOrEmptyChecker : IEmptyChecker
 {
-    public class NullOrEmptyChecker : IEmptyChecker
+    public bool IsEmpty<T>(object checkedObject)
     {
-        public bool IsEmpty<T>(object checkedObject)
+        if (checkedObject == null)
         {
-            if (checkedObject == null)
+            return true;
+        }
+
+        foreach (var property in typeof(T).GetProperties())
+        {
+            var propertyValue = property.GetValue(checkedObject);
+
+            if (propertyValue is IEnumerable collection)
             {
-                return true;
-            }
-
-            foreach (var property in typeof(T).GetProperties())
-            {
-                object? propertyValue = property.GetValue(checkedObject);
-
-                if (propertyValue is IEnumerable collection)
-                {
-                    if (collection.Cast<object>().Any())
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-
-                if (propertyValue != null)
+                if (collection.Cast<object>().Any())
                 {
                     return false;
                 }
+                else
+                {
+                    continue;
+                }
             }
-            return true;
+
+            if (propertyValue != null)
+            {
+                return false;
+            }
         }
+        return true;
     }
 }
