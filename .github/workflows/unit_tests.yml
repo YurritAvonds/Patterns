@@ -3,11 +3,6 @@
 
 name: Run Unit Tests
 
-env:
-  BuildConfiguration: Release
-  SolutionFile: Patterns.slnx
-  TestCategory: Unit
-
 on:
   push:
     branches: [ "master" ]
@@ -26,12 +21,9 @@ jobs:
       with:
         dotnet-version: 9.0.x
     - name: Run Unit Tests and report Test Coverage
-      working-directory: $
       run: dotnet test \
               --no-build \
               --verbosity normal \
-              --configuration $ \
-              --filter "Category=$" \
               --collect:"XPlat Code Coverage" \
               -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
     - name: Publish code coverage results
