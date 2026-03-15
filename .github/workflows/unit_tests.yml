@@ -1,0 +1,42 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Run Unit Tests
+
+env:
+  BuildConfiguration: Release
+  SolutionFile: Patterns.slnx
+  TestCategory: Unit
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v6
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: 9.0.x
+    - name: Run Unit Tests and report Test Coverage
+      working-directory: $
+      run: dotnet test \
+              --no-build \
+              --verbosity normal \
+              --configuration $ \
+              --filter "Category=$" \
+              --collect:"XPlat Code Coverage" \
+              -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
+    - name: Publish code coverage results
+      uses: actions/upload-artifact@v7
+      with:
+        name: code-coverage-report
+        path: '**/coverage.cobertura.xml'
+        
