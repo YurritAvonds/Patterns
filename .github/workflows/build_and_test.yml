@@ -24,6 +24,15 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-      
+    - name: Run Unit Tests and report Test Coverage
+      working-directory: $
+      run: dotnet test $ \
+              --no-build \
+              --verbosity normal
+              --collect:"XPlat Code Coverage" \
+              -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
+    - name: Publish code coverage results
+      uses: actions/upload-artifact@v7
+      with:
+        name: code-coverage-report
+        path: '**/test_coverage.xml'
