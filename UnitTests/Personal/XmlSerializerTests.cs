@@ -160,8 +160,54 @@ internal class XmlSerializerTests
             leafBoolean: string.Empty);
     }
 
-    // Initialized object
-    // Uninitialized object
+    [Test]
+    [Category("Unit")]
+    public void Serialize_Object_Unitialized()
+    {
+        // Arrange
+        var root = new Root()
+        {
+            RootObject = null
+        };
+
+        // Act
+        var result = xmlSerializer.Serialize(root);
+
+        // Assert
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Root");
+
+        doc.Element("RootObject")?.Value.Should().BeEmpty();
+        doc.Element("RootString")?.Value.Should().BeEmpty();
+        doc.Element("RootInteger")?.Value.Should().BeEmpty();
+        doc.Element("RootObjects")?.Value.Should().BeEmpty();
+    }
+
+    [Test]
+    [Category("Unit")]
+    public void Serialize_Object_Itialized()
+    {
+        // Arrange
+        var root = new Root()
+        {
+            RootObject = new Leaf()
+        };
+
+        // Act
+        var result = xmlSerializer.Serialize(root);
+
+        // Assert
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Root");
+
+        AssertLeaf(doc,
+            leafString: string.Empty,
+            leafInteger: string.Empty,
+            leafBoolean: string.Empty);
+        doc.Element("RootString")?.Value.Should().BeEmpty();
+        doc.Element("RootInteger")?.Value.Should().BeEmpty();
+        doc.Element("RootObjects")?.Value.Should().BeEmpty();
+    }
 
     [Test]
     [Category("Integration")]
@@ -272,8 +318,11 @@ internal class XmlSerializerTests
     private static void AssertLeaf(XElement? leaf, string leafString, string leafInteger, string leafBoolean)
     {
         leaf.Should().NotBeNull();
+        leaf.Element("LeafString").Should().NotBeNull();
         leaf.Element("LeafString")?.Value.Should().Be(leafString);
+        leaf.Element("LeafInteger").Should().NotBeNull();
         leaf.Element("LeafInteger")?.Value.Should().Be(leafInteger);
+        leaf.Element("LeafBoolean").Should().NotBeNull();
         leaf.Element("LeafBoolean")?.Value.Should().Be(leafBoolean);
     }
 }
