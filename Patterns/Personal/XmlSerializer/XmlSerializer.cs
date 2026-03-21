@@ -26,17 +26,17 @@ public class XmlSerializer(XmlWriterSettings settings)
         {
             var value = property.GetValue(rootObject);
 
-            if (property.PropertyType.IsCollectionType())
+            switch (property.PropertyType.GetHighLevelType())
             {
-                SerializeCollection(writer, value, property.Name);
-            }
-            else if (property.PropertyType.IsObjectType())
-            {
-                SerializeObject(writer, value, property.Name);
-            }
-            else if (property.PropertyType.IsSimpleType())
-            {
-                SerializeSimpleType(writer, value, property.Name);
+                case HighLevelType.Simple:
+                    SerializeSimpleType(writer, value, property.Name);
+                    break;
+                case HighLevelType.Object:
+                    SerializeObject(writer, value, property.Name);
+                    break;
+                case HighLevelType.Collection:
+                    SerializeCollection(writer, value, property.Name);
+                    break;
             }
         }
 
