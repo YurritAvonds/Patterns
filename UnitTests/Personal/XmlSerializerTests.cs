@@ -300,16 +300,16 @@ internal class XmlSerializerTests
             "2",
             "True");
 
-        doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeString")?.Value.Should().Be("L1_String");
-        doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeObject")?.Element("NodeString")?.Value.Should().Be("L2_String");
+        doc.Element("RootObjects")?.Element("Node")?.Element("NodeString")?.Value.Should().Be("L1_String");
+        doc.Element("RootObjects")?.Element("Node")?.Element("NodeObject")?.Element("NodeString")?.Value.Should().Be("L2_String");
         AssertLeaf(
-            doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeObject")?.Element("NodeObjects")?.Element("LeafObject"),
+            doc.Element("RootObjects")?.Element("Node")?.Element("NodeObject")?.Element("NodeObjects")?.Element("Leaf"),
             "L2_Coll_Obj",
             "2",
             "False");
 
         AssertLeaf(
-            doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeObjects")?.Element("LeafObject"),
+            doc.Element("RootObjects")?.Element("Node")?.Element("NodeObjects")?.Element("Leaf"),
             "L1_Coll_Obj",
             "1",
             "False");
@@ -318,11 +318,11 @@ internal class XmlSerializerTests
     private static void AssertLeaf(XElement? leaf, string leafString, string leafInteger, string leafBoolean)
     {
         leaf.Should().NotBeNull();
-        leaf.Element("LeafString").Should().NotBeNull();
-        leaf.Element("LeafString")?.Value.Should().Be(leafString);
-        leaf.Element("LeafInteger").Should().NotBeNull();
-        leaf.Element("LeafInteger")?.Value.Should().Be(leafInteger);
-        leaf.Element("LeafBoolean").Should().NotBeNull();
+        leaf.Element("LeafBoolean")?.Value.Should().NotBeNull();
         leaf.Element("LeafBoolean")?.Value.Should().Be(leafBoolean);
+        leaf.Element("LeafString")?.Value.Should().NotBeNull();
+        leaf.Element("LeafString")?.Value.Should().Be(leafString);
+        leaf.Element("LeafInteger")?.Value.Should().NotBeNull();
+        leaf.Element("LeafInteger")?.Value.Should().Be(leafInteger);
     }
 }
