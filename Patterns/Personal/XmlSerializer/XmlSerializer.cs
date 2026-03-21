@@ -4,23 +4,16 @@ using System.Xml;
 
 namespace Patterns.Personal.XmlSerializer;
 
-public class XmlSerializer
+public class XmlSerializer(XmlWriterSettings settings)
 {
     public string Serialize(object rootObject)
     {
         var stringBuilder = new StringBuilder();
-        var settings = new XmlWriterSettings
-        {
-            Indent = true,
-            OmitXmlDeclaration = true,
-            ConformanceLevel = ConformanceLevel.Auto
-        };
         using (var writer = XmlWriter.Create(stringBuilder, settings))
         {
             writer.WriteStartElement(rootObject.GetType().Name);
             Serialize(rootObject, writer);
             writer.WriteEndElement();
-
         }
 
         return stringBuilder.ToString();

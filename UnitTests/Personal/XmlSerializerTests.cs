@@ -1,11 +1,26 @@
 ﻿using FluentAssertions;
 using Patterns.Personal.XmlSerializer;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace UnitTests.Personal;
 
 internal class XmlSerializerTests
 {
+    private readonly XmlSerializer xmlSerializer;
+
+    public XmlSerializerTests()
+    {
+        xmlSerializer = new XmlSerializer(
+            new XmlWriterSettings
+            {
+                Indent = true,
+                OmitXmlDeclaration = true,
+                ConformanceLevel = ConformanceLevel.Auto
+            }
+        );
+    }
+
 
 
     [Test]
@@ -15,7 +30,6 @@ internal class XmlSerializerTests
         // Arrange
         var rootObject = new Root();
         rootObject.RootObjects.Add(new Node());
-        var xmlSerializer = new XmlSerializer();
 
         // Act
         var result = xmlSerializer.Serialize(rootObject);
@@ -83,7 +97,6 @@ internal class XmlSerializerTests
                 }
             ]
         });
-        var xmlSerializer = new XmlSerializer();
 
         // Act
         var result = xmlSerializer.Serialize(rootObject);
@@ -95,18 +108,32 @@ internal class XmlSerializerTests
         doc.Element("RootString")?.Value.Should().Be("L1_String");
         doc.Element("RootInteger")?.Value.Should().Be("1");
 
-        doc.Element("RootObject")?.Element("LeafString")?.Value.Should().Be("L2_String");
-        doc.Element("RootObject")?.Element("LeafInteger")?.Value.Should().Be("2");
-        doc.Element("RootObject")?.Element("LeafBoolean")?.Value.Should().Be("True");
+        AssertLeaf(
+            doc.Element("RootObject"),
+            "L2_String",
+            "2",
+            "True");
 
         doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeString")?.Value.Should().Be("L1_String");
         doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeObject")?.Element("NodeString")?.Value.Should().Be("L2_String");
-        doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeObject")?.Element("NodeObjects")?.Element("LeafObject")?.Element("LeafString")?.Value.Should().Be("L2_Coll_Obj");
-        doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeObject")?.Element("NodeObjects")?.Element("LeafObject")?.Element("LeafInteger")?.Value.Should().Be("2");
-        doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeObject")?.Element("NodeObjects")?.Element("LeafObject")?.Element("LeafBoolean")?.Value.Should().Be("False");
+        AssertLeaf(
+            doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeObject")?.Element("NodeObjects")?.Element("LeafObject"),
+            "L2_Coll_Obj",
+            "2",
+            "False");
 
-        doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeObjects")?.Element("LeafObject")?.Element("LeafString")?.Value.Should().Be("L1_Coll_Obj");
-        doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeObjects")?.Element("LeafObject")?.Element("LeafInteger")?.Value.Should().Be("1");
-        doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeObjects")?.Element("LeafObject")?.Element("LeafBoolean")?.Value.Should().Be("False");
+        AssertLeaf(
+            doc.Element("RootObjects")?.Element("NodeObject")?.Element("NodeObjects")?.Element("LeafObject"),
+            "L1_Coll_Obj",
+            "1",
+            "False");
+    }
+
+    private static void AssertLeaf(XElement? leaf, string leafString, string leafInteger, string leafBoolean)
+    {
+        leaf.Should().NotBeNull();
+        leaf.Element("LeafString")?.Value.Should().Be(leafString);
+        leaf.Element("LeafInteger")?.Value.Should().Be(leafInteger);
+        leaf.Element("LeafBoolean")?.Value.Should().Be(leafBoolean);
     }
 }
