@@ -210,12 +210,78 @@ internal class XmlSerializerTests
     }
 
     [Test]
+    [Category("Unit")]
+    public void Serialize_Collection()
+    {
+        // Arrange
+        var root = new Root();
+        root.RootObjects?.Add(new Node()
+        {
+            NodeString = "Object1"
+        });
+        root.RootObjects?.Add(new Node()
+        {
+            NodeString = "Object2"
+        });
+
+        // Act
+        var result = xmlSerializer.Serialize(root);
+
+        // Assert
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Root");
+
+        doc.Element("RootObjects")?.Elements("Node")?.ToList()[0].Element("NodeString")?.Value.Should().Be("Object1");
+        doc.Element("RootObjects")?.Elements("Node")?.ToList()[1].Element("NodeString")?.Value.Should().Be("Object2");
+    }
+
+    [Test]
+    [Category("Unit")]
+    public void Serialize_Collection_Empty()
+    {
+        // Arrange
+        var root = new Root
+        {
+            RootObjects = []
+        };
+
+        // Act
+        var result = xmlSerializer.Serialize(root);
+
+        // Assert
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Root");
+
+        doc.Element("RootObjects")?.Elements("Node")?.Should().BeEmpty();
+    }
+
+    [Test]
+    [Category("Unit")]
+    public void Serialize_Collection_Null()
+    {
+        // Arrange
+        var root = new Root
+        {
+            RootObjects = null
+        };
+
+        // Act
+        var result = xmlSerializer.Serialize(root);
+
+        // Assert
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Root");
+
+        doc.Element("RootObjects")?.Should().BeNull();
+    }
+
+    [Test]
     [Category("Integration")]
     public void Serialize_EmptyObject()
     {
         // Arrange
         var rootObject = new Root();
-        rootObject.RootObjects.Add(new Node());
+        rootObject.RootObjects?.Add(new Node());
 
         // Act
         var result = xmlSerializer.Serialize(rootObject);
@@ -259,7 +325,7 @@ internal class XmlSerializerTests
                 LeafBoolean = true
             }
         };
-        rootObject.RootObjects.Add(new Node()
+        rootObject.RootObjects?.Add(new Node()
         {
             NodeString = "L1_String",
             NodeObject = new Node()
