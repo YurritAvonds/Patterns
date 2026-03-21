@@ -3,7 +3,7 @@ using System.Collections;
 using System.Text;
 using System.Xml;
 
-namespace Patterns.Personal.XmlSerializer;
+namespace Patterns.Personal.Serializers;
 
 public class XmlSerializer(XmlWriterSettings settings) : ISerializer
 {
