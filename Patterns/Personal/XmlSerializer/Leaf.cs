@@ -1,6 +1,6 @@
 ﻿namespace Patterns.Personal.XmlSerializer;
 
-public class LeafObject
+public class Leaf
 {
     public string? LeafString { get; set; }
     public int LeafInteger { get; set; }
