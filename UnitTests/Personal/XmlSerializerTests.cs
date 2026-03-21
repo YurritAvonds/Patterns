@@ -21,7 +21,147 @@ internal class XmlSerializerTests
         );
     }
 
+    [Test]
+    [Category("Unit")]
+    [TestCase("Test String")]
+    [TestCase("")]
+    public void Serialize_String(string input)
+    {
+        // Arrange
+        var leaf = new Leaf
+        {
+            LeafString = input
+        };
 
+        // Act
+        var result = xmlSerializer.Serialize(leaf);
+
+        // Assert
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Leaf");
+        AssertLeaf(doc,
+            leafString: input,
+            leafInteger: string.Empty,
+            leafBoolean: string.Empty);
+    }
+
+    [Test]
+    [Category("Unit")]
+    public void Serialize_String_Null()
+    {
+        // Arrange
+        var leaf = new Leaf
+        {
+            LeafString = null
+        };
+
+        // Act
+        var result = xmlSerializer.Serialize(leaf);
+
+        // Assert
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Leaf");
+        AssertLeaf(doc,
+            leafString: string.Empty,
+            leafInteger: string.Empty,
+            leafBoolean: string.Empty);
+    }
+
+    [Test]
+    [Category("Unit")]
+    [TestCase(-1, "-1")]
+    [TestCase(0, "0")]
+    [TestCase(1, "1")]
+    public void Serialize_Integer(int input, string expected)
+    {
+        // Arrange
+        var leaf = new Leaf
+        {
+            LeafInteger = input
+        };
+
+        // Act
+        var result = xmlSerializer.Serialize(leaf);
+
+        // Assert
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Leaf");
+        AssertLeaf(doc,
+            leafString: string.Empty,
+            leafInteger: expected,
+            leafBoolean: string.Empty);
+    }
+
+    [Test]
+    [Category("Unit")]
+    public void Serialize_Integer_Null()
+    {
+        // Arrange
+        var leaf = new Leaf
+        {
+            LeafInteger = null
+        };
+
+        // Act
+        var result = xmlSerializer.Serialize(leaf);
+
+        // Assert
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Leaf");
+        AssertLeaf(doc,
+            leafString: string.Empty,
+            leafInteger: string.Empty,
+            leafBoolean: string.Empty);
+    }
+
+    [Test]
+    [Category("Unit")]
+    [TestCase(false, "False")]
+    [TestCase(true, "True")]
+    public void Serialize_Boolean(bool input, string expected)
+    {
+        // Arrange
+        var leaf = new Leaf
+        {
+            LeafBoolean = input
+        };
+
+        // Act
+        var result = xmlSerializer.Serialize(leaf);
+
+        // Assert
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Leaf");
+        AssertLeaf(doc,
+            leafString: string.Empty,
+            leafInteger: string.Empty,
+            leafBoolean: expected);
+    }
+
+    [Test]
+    [Category("Unit")]
+    public void Serialize_Boolean_Null()
+    {
+        // Arrange
+        var leaf = new Leaf
+        {
+            LeafBoolean = null
+        };
+
+        // Act
+        var result = xmlSerializer.Serialize(leaf);
+
+        // Assert
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Leaf");
+        AssertLeaf(doc,
+            leafString: string.Empty,
+            leafInteger: string.Empty,
+            leafBoolean: string.Empty);
+    }
+
+    // Initialized object
+    // Uninitialized object
 
     [Test]
     [Category("Integration")]
@@ -45,7 +185,7 @@ internal class XmlSerializerTests
         doc.Element("RootString")?.Value.Should().BeEmpty();
 
         doc.Element("RootInteger").Should().NotBeNull();
-        doc.Element("RootInteger")?.Value.Should().Be("0");
+        doc.Element("RootInteger")?.Value.Should().BeEmpty();
 
         doc.Element("RootObjects").Should().NotBeNull();
         doc.Element("RootObjects")?.Elements("Node").ToList().Should().HaveCount(1);
