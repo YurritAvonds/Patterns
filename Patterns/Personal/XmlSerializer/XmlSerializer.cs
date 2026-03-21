@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Patterns.Personal.TypeChecker;
+using System.Collections;
 using System.Text;
 using System.Xml;
 
@@ -25,15 +26,15 @@ public class XmlSerializer(XmlWriterSettings settings)
         {
             var value = property.GetValue(rootObject);
 
-            if (IsCollectionType(property.PropertyType))
+            if (property.PropertyType.IsCollectionType())
             {
                 SerializeCollection(writer, value, property.Name);
             }
-            else if (IsObjectType(property))
+            else if (property.PropertyType.IsObjectType())
             {
                 SerializeObject(writer, value, property.Name);
             }
-            else if (IsSimpleType(property.PropertyType))
+            else if (property.PropertyType.IsSimpleType())
             {
                 SerializeSimpleType(writer, value, property.Name);
             }
@@ -81,41 +82,5 @@ public class XmlSerializer(XmlWriterSettings settings)
         writer.WriteEndElement();
 
         return;
-    }
-
-    private static bool IsCollectionType(Type type)
-    {
-        return type != typeof(string)
-            && typeof(IEnumerable).IsAssignableFrom(type);
-    }
-
-    private static bool IsSimpleType(Type type)
-    {
-        return type.IsPrimitive
-            || type.IsEnum
-            || type == typeof(string)
-            || type == typeof(int?)
-            || type == typeof(double)
-            || type == typeof(double?)
-            || type == typeof(decimal)
-            || type == typeof(decimal?)
-            || type == typeof(bool)
-            || type == typeof(bool?)
-            || type == typeof(DateTime)
-            || type == typeof(DateTime?)
-            || type == typeof(DateOnly)
-            || type == typeof(DateOnly?)
-            || type == typeof(TimeOnly)
-            || type == typeof(TimeOnly?)
-            || type == typeof(DateTimeOffset)
-            || type == typeof(DateTimeOffset?)
-            || type == typeof(TimeSpan)
-            || type == typeof(TimeSpan?)
-            || type == typeof(Guid);
-    }
-
-    private static bool IsObjectType(System.Reflection.PropertyInfo property)
-    {
-        return property.PropertyType.IsClass && property.PropertyType != typeof(string);
     }
 }
