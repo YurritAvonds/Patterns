@@ -185,7 +185,7 @@ internal class XmlSerializerTests
 
     [Test]
     [Category("Unit")]
-    public void Serialize_Object_Itialized()
+    public void Serialize_Object_Initialized()
     {
         // Arrange
         var root = new Root()
