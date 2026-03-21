@@ -10,6 +10,44 @@ internal class TypeCheckerTests
     private class SampleClass { }
 
     [Test]
+    [TestCase(typeof(SampleClass), HighLevelType.Object)]
+    [TestCase(typeof(object), HighLevelType.Object)]
+
+    [TestCase(typeof(List<int>), HighLevelType.Collection)]
+    [TestCase(typeof(int[]), HighLevelType.Collection)]
+    [TestCase(typeof(IEnumerable<int>), HighLevelType.Collection)]
+
+    [TestCase(typeof(int), HighLevelType.Simple)]
+    [TestCase(typeof(SampleEnum), HighLevelType.Simple)]
+    [TestCase(typeof(string), HighLevelType.Simple)]
+    [TestCase(typeof(int?), HighLevelType.Simple)]
+    [TestCase(typeof(double), HighLevelType.Simple)]
+    [TestCase(typeof(double?), HighLevelType.Simple)]
+    [TestCase(typeof(decimal), HighLevelType.Simple)]
+    [TestCase(typeof(decimal?), HighLevelType.Simple)]
+    [TestCase(typeof(bool), HighLevelType.Simple)]
+    [TestCase(typeof(bool?), HighLevelType.Simple)]
+    [TestCase(typeof(DateTime), HighLevelType.Simple)]
+    [TestCase(typeof(DateTime?), HighLevelType.Simple)]
+    [TestCase(typeof(DateOnly), HighLevelType.Simple)]
+    [TestCase(typeof(DateOnly?), HighLevelType.Simple)]
+    [TestCase(typeof(TimeOnly), HighLevelType.Simple)]
+    [TestCase(typeof(TimeOnly?), HighLevelType.Simple)]
+    [TestCase(typeof(DateTimeOffset), HighLevelType.Simple)]
+    [TestCase(typeof(DateTimeOffset?), HighLevelType.Simple)]
+    [TestCase(typeof(TimeSpan), HighLevelType.Simple)]
+    [TestCase(typeof(TimeSpan?), HighLevelType.Simple)]
+    [TestCase(typeof(Guid), HighLevelType.Simple)]
+    public void GetHighLevelType(Type type, HighLevelType expected)
+    {
+        // Act
+        var result = type.GetHighLevelType();
+
+        // Assert
+        result.Should().Be(expected);
+    }
+
+    [Test]
     [TestCase(typeof(SampleClass), false)]
     [TestCase(typeof(object), false)]
 

@@ -5,6 +5,26 @@ namespace Patterns.Personal.TypeChecker;
 
 public static class TypeChecker
 {
+    public static HighLevelType GetHighLevelType(this Type type)
+    {
+        if (type.IsCollectionType())
+        {
+            return HighLevelType.Collection;
+        }
+
+        if (type.IsObjectType())
+        {
+            return HighLevelType.Object;
+        }
+
+        if (type.IsSimpleType())
+        {
+            return HighLevelType.Simple;
+        }
+
+        throw new NotSupportedException($"The type {type.FullName} is not supported.");
+    }
+
     public static bool IsCollectionType(this Type type)
     {
         return type != typeof(string)
