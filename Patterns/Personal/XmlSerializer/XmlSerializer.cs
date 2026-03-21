@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace Patterns.Personal.XmlSerializer;
 
-public class XmlSerializer(XmlWriterSettings settings)
+public class XmlSerializer(XmlWriterSettings settings) : ISerializer
 {
     public string Serialize(object rootObject)
     {
