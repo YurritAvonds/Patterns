@@ -94,10 +94,23 @@ public class XmlSerializer(XmlWriterSettings settings)
         return type.IsPrimitive
             || type.IsEnum
             || type == typeof(string)
+            || type == typeof(int?)
+            || type == typeof(double)
+            || type == typeof(double?)
             || type == typeof(decimal)
+            || type == typeof(decimal?)
+            || type == typeof(bool)
+            || type == typeof(bool?)
             || type == typeof(DateTime)
+            || type == typeof(DateTime?)
+            || type == typeof(DateOnly)
+            || type == typeof(DateOnly?)
+            || type == typeof(TimeOnly)
+            || type == typeof(TimeOnly?)
             || type == typeof(DateTimeOffset)
+            || type == typeof(DateTimeOffset?)
             || type == typeof(TimeSpan)
+            || type == typeof(TimeSpan?)
             || type == typeof(Guid);
     }
 
