@@ -1,5 +1,8 @@
 ﻿namespace Patterns.Personal.Serializers;
 
+/// <summary>
+/// Example top level class to be serialized, containing simple properties, complex objects and collections.
+/// </summary>
 public class Root
 {
     public Leaf? RootObject { get; set; }

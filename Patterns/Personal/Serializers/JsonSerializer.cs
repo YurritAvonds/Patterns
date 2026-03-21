@@ -6,6 +6,11 @@ namespace Patterns.Personal.Serializers;
 
 public class JsonSerializer() : ISerializer
 {
+    /// <summary>
+    /// Convert C# objects to corresponding JSON representation.
+    /// </summary>
+    /// <param name="rootObject">The object to be serialized.</param>
+    /// <returns></returns>
     public string Serialize(object rootObject)
     {
         var stringWriter = new StringWriter();

@@ -7,6 +7,11 @@ namespace Patterns.Personal.Serializers;
 
 public class XmlSerializer(XmlWriterSettings settings) : ISerializer
 {
+    /// <summary>
+    /// Convert C# objects to corresponding XML representation.
+    /// </summary>
+    /// <param name="rootObject">The object to be serialized.</param>
+    /// <returns></returns>
     public string Serialize(object rootObject)
     {
         var stringBuilder = new StringBuilder();

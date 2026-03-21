@@ -1,5 +1,8 @@
 ﻿namespace Patterns.Personal.Serializers;
 
+/// <summary>
+/// Example class with only simple properties to be serialized.
+/// </summary>
 public class Leaf
 {
     public string? LeafString { get; set; }

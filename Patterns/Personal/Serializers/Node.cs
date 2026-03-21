@@ -1,5 +1,9 @@
 ﻿namespace Patterns.Personal.Serializers;
 
+/// <summary>
+/// Example class with simple properties, complex objects and collections to be serialized.
+/// When used in a hierarchy, this is neither the Root object, nor a Leaf object.
+/// </summary>
 public class Node
 {
     public string? NodeString { get; set; }
