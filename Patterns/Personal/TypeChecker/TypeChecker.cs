@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.ComponentModel;
 
 namespace Patterns.Personal.TypeChecker;
 
@@ -12,27 +13,18 @@ public static class TypeChecker
 
     public static bool IsSimpleType(this Type type)
     {
-        return type.IsPrimitive
-            || type.IsEnum
-            || type == typeof(string)
-            || type == typeof(int?)
-            || type == typeof(double)
-            || type == typeof(double?)
-            || type == typeof(decimal)
-            || type == typeof(decimal?)
-            || type == typeof(bool)
-            || type == typeof(bool?)
-            || type == typeof(DateTime)
-            || type == typeof(DateTime?)
-            || type == typeof(DateOnly)
-            || type == typeof(DateOnly?)
-            || type == typeof(TimeOnly)
-            || type == typeof(TimeOnly?)
-            || type == typeof(DateTimeOffset)
-            || type == typeof(DateTimeOffset?)
-            || type == typeof(TimeSpan)
-            || type == typeof(TimeSpan?)
-            || type == typeof(Guid);
+        type = Nullable.GetUnderlyingType(type) ?? type;
+
+        if (type.IsEnum)
+            return true;
+
+        if (type == typeof(string))
+            return true;
+
+        var converter = TypeDescriptor.GetConverter(type);
+        return !type.IsClass
+            && !type.IsCollectionType()
+            && converter.CanConvertTo(typeof(string));
     }
 
     public static bool IsObjectType(this Type type)
