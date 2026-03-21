@@ -6,7 +6,10 @@ namespace UnitTests.Personal;
 
 internal class XmlSerializerTests
 {
+
+
     [Test]
+    [Category("Integration")]
     public void Serialize_EmptyObject()
     {
         // Arrange
@@ -21,37 +24,27 @@ internal class XmlSerializerTests
         var doc = XElement.Parse(result);
         doc.Name.LocalName.Should().Be("Root");
 
-        var leaf = doc.Element("RootObject");
-        leaf.Should().NotBeNull();
-        leaf.Value.Should().BeEmpty();
+        doc.Element("RootObject").Should().NotBeNull();
+        doc.Element("RootObject")?.Value.Should().BeEmpty();
 
-        var rootString = doc.Element("RootString");
-        rootString.Should().NotBeNull();
-        rootString.Value.Should().BeEmpty();
+        doc.Element("RootString").Should().NotBeNull();
+        doc.Element("RootString")?.Value.Should().BeEmpty();
 
-        var rootInteger = doc.Element("RootInteger");
-        rootInteger.Should().NotBeNull();
-        rootInteger.Value.Should().Be("0");
+        doc.Element("RootInteger").Should().NotBeNull();
+        doc.Element("RootInteger")?.Value.Should().Be("0");
 
-        var nodeObjects = doc.Element("RootObjects");
-        nodeObjects.Should().NotBeNull();
-
-        var nodes = nodeObjects!.Elements("Node").ToList();
-        nodes.Should().HaveCount(1);
-
-        var node = nodes[0];
-        var nodeObjectString = node.Element("NodeString");
-        nodeObjectString.Should().NotBeNull();
-        nodeObjectString.Value.Should().BeEmpty();
-        var nodeNodeObject = node.Element("NodeObject");
-        nodeNodeObject.Should().NotBeNull();
-        nodeNodeObject.Value.Should().BeEmpty();
-        var subObjects = node.Element("NodeObjects");
-        subObjects.Should().NotBeNull();
-        subObjects.Elements().Should().BeEmpty();
+        doc.Element("RootObjects").Should().NotBeNull();
+        doc.Element("RootObjects")?.Elements("Node").ToList().Should().HaveCount(1);
+        doc.Element("RootObjects")?.Elements("Node").ToList()[0].Element("NodeString").Should().NotBeNull();
+        doc.Element("RootObjects")?.Elements("Node")?.ToList()[0].Element("NodeString")?.Value.Should().BeEmpty();
+        doc.Element("RootObjects")?.Elements("Node").ToList()[0].Element("NodeObject").Should().NotBeNull();
+        doc.Element("RootObjects")?.Elements("Node")?.ToList()[0].Element("NodeObject")?.Value.Should().BeEmpty();
+        doc.Element("RootObjects")?.Elements("Node").ToList()[0].Element("NodeObjects").Should().NotBeNull();
+        doc.Element("RootObjects")?.Elements("Node")?.ToList()[0].Element("NodeObjects")?.Elements().Should().BeEmpty();
     }
 
     [Test]
+    [Category("Integration")]
     public void Serialize_FilledObject()
     {
         // Arrange
