@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/FileBasedPrograms/">
+    <File Path="FileBasedPrograms/DependencyInjection.cs" />
+  </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
     <File Path=".github/workflows/build_and_test.yml" />
