@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Standard\Mediator\" />
     <Folder Include="Standard\TemplateMethod\" />
     <Folder Include="Standard\Observer\" />
     <Folder Include="Standard\Prototype\" />
