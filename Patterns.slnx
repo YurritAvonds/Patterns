@@ -8,6 +8,7 @@
     <File Path=".github/workflows/documentation.yml" />
     <File Path=".gitignore" />
     <File Path="doxyfile" />
+    <File Path="README.md" />
   </Folder>
   <Project Path="Patterns/Patterns.csproj" />
   <Project Path="UnitTests/UnitTests.csproj" />

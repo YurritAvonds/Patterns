@@ -2,43 +2,39 @@
 
 namespace Patterns.Standard.AbstractFactory;
 
+/// <summary>
+/// The client determines which factory to use based on a setting.
+/// </summary>
 public class Client
 {
     private IFactory? factory;
-    public List<IBaseType> Results { get; private set; } = [];
 
-    public void Main(int systemType)
+    public IEnumerable<IBaseType> Produce(FactoryType factoryType)
     {
-        Setup(systemType);
-        Produce();
+        Setup(factoryType);
+        return Produce();
     }
 
-    private void Produce()
+    private void Setup(FactoryType factoryType)
+    {
+        factory = factoryType switch
+        {
+            FactoryType.One => new ObjectTypeOneFactory(),
+            FactoryType.Two => new ObjectTypeTwoFactory(),
+            _ => throw new ArgumentException("Invalid system type"),
+        };
+    }
+
+    private IEnumerable<IBaseType> Produce()
     {
         if (factory == null)
         {
             throw new InvalidOperationException("Factory not initialized");
         }
 
-        for (var i = 0; i < 3; i++)
+        foreach (var item in factory)
         {
-            Results.Add(factory[i]);
-        }
-    }
-
-    private void Setup(int systemType)
-    {
-        if (systemType == 1)
-        {
-            factory = new FirstVariantFactory();
-        }
-        else if (systemType == 2)
-        {
-            factory = new SecondVariantFactory();
-        }
-        else
-        {
-            throw new ArgumentException("Invalid system type");
+            yield return item;
         }
     }
 }

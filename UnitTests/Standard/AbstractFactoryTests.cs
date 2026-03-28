@@ -5,19 +5,19 @@ namespace UnitTests.Standard;
 
 internal class AbstractFactoryTests
 {
-    [TestCase(1, false, false, true)]
-    [TestCase(2, true, true, false)]
-    public void Produce(int systemType, bool expected1, bool expected2, bool expected3)
+    [TestCase(FactoryType.One, false, false, true)]
+    [TestCase(FactoryType.Two, true, true, false)]
+    public void Produce(FactoryType factoryType, bool expected1, bool expected2, bool expected3)
     {
         // Arrange
         var client = new Client();
 
         // Act
-        client.Main(systemType);
+        var products = client.Produce(factoryType).ToList();
 
         // Assert
-        client.Results[0].SharedMethod().Should().Be(expected1);
-        client.Results[1].SharedMethod().Should().Be(expected2);
-        client.Results[2].SharedMethod().Should().Be(expected3);
+        products[0].Method().Should().Be(expected1);
+        products[1].Method().Should().Be(expected2);
+        products[2].Method().Should().Be(expected3);
     }
 }

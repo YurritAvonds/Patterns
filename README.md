@@ -1,6 +1,6 @@
 # Patterns
 
-Reference repository containing a number of design patterns and other concepts/structures. Intended as a source of inspiration and to be able to quickly grasp and try out (through corresponding unit tests) these concepts.
+Reference repository containing a number of design patterns and other concepts/structures. Intended as a source of inspiration and to be able to quickly understand and try out these concepts through their corresponding unit tests.
 
 ## Doxygen Documentation
 
@@ -8,7 +8,7 @@ Reference repository containing a number of design patterns and other concepts/s
 
 ## Standard
 
-The standard design patterns as documented on [Refactoring Guru](https://refactoring.guru/). Currently incomplete but more will be added over time.
+The standard design patterns as documented on [Refactoring Guru](https://refactoring.guru/).
 
 * [Source](https://github.com/YurritAvonds/Patterns/tree/master/Patterns/Standard)
 * [Unit Tests](https://github.com/YurritAvonds/Patterns/tree/master/UnitTests/Standard)
