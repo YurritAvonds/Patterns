@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Standard\TemplateMethod\" />
-    <Folder Include="Standard\Observer\" />
     <Folder Include="Standard\Prototype\" />
   </ItemGroup>
 
