@@ -3,7 +3,7 @@
 namespace Patterns.Standard.Factory;
 
 /// <summary>
-/// (Optional) factory that contains shared methods common to all factory types.
+/// (Optional) factory base class that contains shared methods common to all factory types.
 /// </summary>
 public abstract class Factory : IFactory
 {
