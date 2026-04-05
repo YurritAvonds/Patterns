@@ -1,27 +1,22 @@
 ﻿namespace Patterns.Standard.Bridge;
 
+/// <summary>
+/// Example implementatioon
+/// </summary>
 public class ImplementationOne : IImplementation
 {
     private int value = 1;
     private bool enabled = false;
 
     public int GetCurrentValue()
-    {
-        return value;
-    }
-
-    public bool GetEnabled()
-    {
-        return enabled;
-    }
+        => value;
 
     public void SetCurrentValue(int value)
-    {
-        this.value = value;
-    }
+        => this.value = value;
+
+    public bool GetEnabled()
+        => enabled;
 
     public void SetEnabled(bool enabled)
-    {
-        this.enabled = enabled;
-    }
+        => this.enabled = enabled;
 }
