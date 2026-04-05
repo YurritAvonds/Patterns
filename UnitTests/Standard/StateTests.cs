@@ -1,4 +1,4 @@
-﻿using Patterns.Standard.State;
+﻿using Patterns.Standard.State.Examples;
 
 namespace UnitTests.Standard;
 
@@ -8,17 +8,14 @@ internal class StateTests
     public void StateTransitions()
     {
         // Arrange
-        var stateOne = new StateOne();
-        var context = new Context(stateOne);
-        stateOne.SetContext(context);
+        var context = new ConcreteContext(new StateOne());
 
         // Act
-        var stringResult = "";
-        stringResult += context.GetString();
-        stringResult += context.GetString();
-        stringResult += context.GetString();
+        context.Continue();
+        context.Continue();
+        context.Continue();
 
         // Assert
-        stringResult.Should().Be("OneTwoThree");
+        context.Results.Should().Equal("One", "Two", "Three");
     }
 }
