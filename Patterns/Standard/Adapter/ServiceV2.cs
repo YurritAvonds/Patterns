@@ -1,5 +1,8 @@
 ﻿namespace Patterns.Standard.Adapter;
 
+/// <summary>
+/// Second improved version of an example service, where the method(s) have a different signature.
+/// </summary>
 public class ServiceV2
 {
     public enum CaseConversion
