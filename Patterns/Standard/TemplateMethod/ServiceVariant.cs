@@ -1,6 +1,6 @@
 ﻿namespace Patterns.Standard.TemplateMethod;
 
-public class AlternateProcessor : Processor
+public class ServiceVariant : Service
 {
     /// <summary>
     /// Do not apply the ToUpper from the base implementation

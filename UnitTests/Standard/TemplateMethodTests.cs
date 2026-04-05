@@ -8,7 +8,7 @@ internal class TemplateMethodTests
     public void CallProcessor()
     {
         // Arrange
-        var processor = new Processor();
+        var processor = new Service();
 
         // Act
         var result = processor.Process("Hello World");
@@ -21,7 +21,7 @@ internal class TemplateMethodTests
     public void CallAlternateProcessor()
     {
         // Arrange
-        var processor = new AlternateProcessor();
+        var processor = new ServiceVariant();
 
         // Act
         var result = processor.Process("Hello World");

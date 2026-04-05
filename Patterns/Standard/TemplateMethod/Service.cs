@@ -1,6 +1,6 @@
 ﻿namespace Patterns.Standard.TemplateMethod;
 
-public class Processor
+public class Service
 {
     public string Process(string input)
     {

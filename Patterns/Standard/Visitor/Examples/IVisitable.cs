@@ -1,6 +1,6 @@
-﻿namespace Patterns.Standard.Visitor;
+﻿namespace Patterns.Standard.Visitor.Examples;
 
-public interface IBase
+public interface IVisitable
 {
     public void Accept(IVisitor visitor);
 

@@ -1,13 +1,13 @@
-﻿namespace Patterns.Standard.Visitor;
+﻿namespace Patterns.Standard.Visitor.Examples;
 
 internal class Client
 {
     public void Run()
     {
-        List<IBase> variants =
+        List<IVisitable> variants =
         [
-            new VariantOne(),
-            new VariantTwo()
+            new VisitableOne(),
+            new VisitableTwo()
         ];
 
         IVisitor visitor = new Visitor();

@@ -1,4 +1,5 @@
 ﻿using Patterns.Standard.Visitor;
+using Patterns.Standard.Visitor.Examples;
 
 namespace UnitTests.Standard;
 
@@ -8,10 +9,10 @@ internal class VisitorTests
     public void Visitor_ShouldCollectResults_WhenVisitingVariants()
     {
         // Arrange
-        var variants = new List<IBase>
+        var variants = new List<IVisitable>
         {
-            new VariantOne(),
-            new VariantTwo()
+            new VisitableOne(),
+            new VisitableTwo()
         };
         var visitor = new Visitor();
 

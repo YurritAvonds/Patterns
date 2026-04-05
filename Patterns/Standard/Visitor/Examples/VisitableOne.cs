@@ -1,6 +1,6 @@
-﻿namespace Patterns.Standard.Visitor;
+﻿namespace Patterns.Standard.Visitor.Examples;
 
-public class VariantOne : IBase
+public class VisitableOne : IVisitable
 {
     public void Accept(IVisitor visitor)
         => visitor.Visit(this);
