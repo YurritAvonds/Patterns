@@ -10,7 +10,6 @@ internal class ResultTests
     public void Result_Success(int inputValue)
     {
         // Arrange
-        var outerOperation = new OuterOperation();
 
         // Act
         var result = OuterOperation.DoSomething(inputValue);
@@ -26,7 +25,6 @@ internal class ResultTests
     public void Result_TooLow(int inputValue)
     {
         // Arrange
-        var outerOperation = new OuterOperation();
 
         // Act
         var result = OuterOperation.DoSomething(inputValue);
@@ -42,7 +40,6 @@ internal class ResultTests
     public void Result_TooHigh(int inputValue)
     {
         // Arrange
-        var outerOperation = new OuterOperation();
 
         // Act
         var result = OuterOperation.DoSomething(inputValue);
@@ -57,7 +54,6 @@ internal class ResultTests
     public void Result_Null()
     {
         // Arrange
-        var outerOperation = new OuterOperation();
 
         // Act
         var result = OuterOperation.DoSomething(null);
@@ -73,7 +69,6 @@ internal class ResultTests
     public void Result_Odd(int inputValue)
     {
         // Arrange
-        var outerOperation = new OuterOperation();
 
         // Act
         var result = OuterOperation.DoSomething(inputValue);
