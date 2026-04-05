@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using UnitTests.Personal.InheritedModificationTesting.Examples;
+﻿using UnitTests.Personal.InheritedModificationTesting.Examples;
 
 namespace UnitTests.Personal.InheritedModificationTesting;
 

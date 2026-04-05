@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Standard.Decorator;
+﻿using Patterns.Standard.Decorator;
 
 namespace UnitTests.Standard;
 

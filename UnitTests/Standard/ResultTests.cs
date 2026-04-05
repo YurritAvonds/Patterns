@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Standard.Result;
+﻿using Patterns.Standard.Result;
 
 namespace UnitTests.Standard;
 
@@ -14,7 +13,7 @@ internal class ResultTests
         var outerOperation = new OuterOperation();
 
         // Act
-        var result = outerOperation.DoSomething(inputValue);
+        var result = OuterOperation.DoSomething(inputValue);
 
         // Assert
         result.IsSuccess.Should().BeTrue();
@@ -30,7 +29,7 @@ internal class ResultTests
         var outerOperation = new OuterOperation();
 
         // Act
-        var result = outerOperation.DoSomething(inputValue);
+        var result = OuterOperation.DoSomething(inputValue);
 
         // Assert
         result.IsSuccess.Should().BeFalse();
@@ -46,7 +45,7 @@ internal class ResultTests
         var outerOperation = new OuterOperation();
 
         // Act
-        var result = outerOperation.DoSomething(inputValue);
+        var result = OuterOperation.DoSomething(inputValue);
 
         // Assert
         result.IsSuccess.Should().BeFalse();
@@ -61,7 +60,7 @@ internal class ResultTests
         var outerOperation = new OuterOperation();
 
         // Act
-        var result = outerOperation.DoSomething(null);
+        var result = OuterOperation.DoSomething(null);
 
         // Assert
         result.IsSuccess.Should().BeFalse();
@@ -77,7 +76,7 @@ internal class ResultTests
         var outerOperation = new OuterOperation();
 
         // Act
-        var result = outerOperation.DoSomething(inputValue);
+        var result = OuterOperation.DoSomething(inputValue);
 
         // Assert
         result.IsSuccess.Should().BeFalse();

@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Personal.InheritedObjectTemplateMethod.Examples;
+﻿using Patterns.Personal.InheritedObjectTemplateMethod.Examples;
 
 namespace UnitTests.Personal;
 

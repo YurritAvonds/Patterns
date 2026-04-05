@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Standard.Mediator;
+﻿using Patterns.Standard.Mediator;
 
 namespace UnitTests.Standard;
 

@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Standard.Proxy;
+﻿using Patterns.Standard.Proxy;
 
 namespace UnitTests.Standard;
 

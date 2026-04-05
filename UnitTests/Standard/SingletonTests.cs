@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-
-namespace UnitTests.Standard;
+﻿namespace UnitTests.Standard;
 
 [TestFixture]
 public class SingletonTests

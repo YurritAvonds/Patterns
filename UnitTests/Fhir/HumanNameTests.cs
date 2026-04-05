@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-
-namespace UnitTests.Fhir;
+﻿namespace UnitTests.Fhir;
 
 internal class HumanNameTests
 {

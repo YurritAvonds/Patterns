@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Standard.Observer;
+﻿using Patterns.Standard.Observer;
 
 namespace UnitTests.Standard;
 

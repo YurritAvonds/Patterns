@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Standard.Iterator;
+﻿using Patterns.Standard.Iterator;
 
 namespace UnitTests.Standard;
 

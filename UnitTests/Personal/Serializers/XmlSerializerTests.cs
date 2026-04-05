@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Personal.Serializers.Examples;
+﻿using Patterns.Personal.Serializers.Examples;
 using System.Xml;
 using System.Xml.Linq;
 using UnitTests.Personal.Serializers.Examples;

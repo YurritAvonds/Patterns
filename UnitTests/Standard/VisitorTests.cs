@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Standard.Visitor;
+﻿using Patterns.Standard.Visitor;
 
 namespace UnitTests.Standard;
 

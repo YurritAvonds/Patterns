@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Standard.Flyweight;
+﻿using Patterns.Standard.Flyweight;
 
 namespace UnitTests.Standard;
 

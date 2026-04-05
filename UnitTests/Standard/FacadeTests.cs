@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Standard.Facade;
+﻿using Patterns.Standard.Facade;
 
 namespace UnitTests.Standard;
 

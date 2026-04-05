@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Standard.Strategy;
+﻿using Patterns.Standard.Strategy;
 
 namespace UnitTests.Standard;
 

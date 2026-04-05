@@ -2,7 +2,7 @@
 
 public class OuterOperation
 {
-    public Result<int?> DoSomething(int? integerParameter)
+    public static Result<int?> DoSomething(int? integerParameter)
     {
         var innerResult = new InnerOperation().DoSomething(integerParameter);
 

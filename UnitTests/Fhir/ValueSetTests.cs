@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Fhir.ValueSet;
+﻿using Patterns.Fhir.ValueSet;
 
 namespace UnitTests.Fhir;
 

@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Patterns.Personal.Serializers.Examples;
 using UnitTests.Personal.Serializers.Examples;
 

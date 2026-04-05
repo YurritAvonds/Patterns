@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Standard.Memento;
+﻿using Patterns.Standard.Memento;
 
 namespace UnitTests.Standard;
 

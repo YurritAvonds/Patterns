@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Standard.Bridge;
+﻿using Patterns.Standard.Bridge;
 
 namespace UnitTests.Standard;
 
