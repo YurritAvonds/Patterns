@@ -1,4 +1,4 @@
-﻿namespace Patterns.Personal.Serializers;
+﻿namespace UnitTests.Personal.Serializers.Examples;
 
 /// <summary>
 /// Example class with simple properties, complex objects and collections to be serialized.

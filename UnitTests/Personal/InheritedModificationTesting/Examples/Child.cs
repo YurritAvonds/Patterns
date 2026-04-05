@@ -1,4 +1,4 @@
-﻿namespace Patterns.Personal.InheritedModification;
+﻿namespace UnitTests.Personal.InheritedModificationTesting.Examples;
 
 public class Child : Parent
 {

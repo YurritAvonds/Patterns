@@ -1,4 +1,4 @@
-﻿namespace Patterns.Personal.TypeChecker;
+﻿namespace Patterns.Personal.TypeChecker.Concept;
 
 public enum HighLevelType
 {

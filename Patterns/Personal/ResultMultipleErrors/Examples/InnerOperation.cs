@@ -1,10 +1,11 @@
 ﻿using Patterns.Standard.Result;
+using Result = Patterns.Personal.ResultMultipleErrors.Concept.Result<int?>;
 
-namespace Patterns.Personal.ResultVariant;
+namespace Patterns.Personal.ResultMultipleErrors.Examples;
 
 internal class InnerOperation
 {
-    public static Result<int?> DoSomething(int? integerParameter)
+    public static Result DoSomething(int? integerParameter)
     {
         if (integerParameter is null)
         {
@@ -16,6 +17,6 @@ internal class InnerOperation
             return Errors.OddNumber;
         }
 
-        return (Result<int?>)integerParameter.Value;
+        return (Result)integerParameter.Value;
     }
 }

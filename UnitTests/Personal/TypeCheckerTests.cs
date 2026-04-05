@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Patterns.Personal.TypeChecker;
+using Patterns.Personal.TypeChecker.Concept;
 
 namespace UnitTests.Personal;
 

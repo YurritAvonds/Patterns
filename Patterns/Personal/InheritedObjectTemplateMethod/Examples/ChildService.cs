@@ -1,5 +1,10 @@
-﻿namespace Patterns.Personal.InheritedObjectTemplateMethod;
+﻿namespace Patterns.Personal.InheritedObjectTemplateMethod.Examples;
 
+/// <summary>
+/// Child Service only needs to define overrides for the steps that it wants to handle differently from
+/// the Parent Service.
+/// </summary>
+/// <typeparam name="TSourceObject">The type of object that will be handled by the service.</typeparam>
 public class ChildService<TSourceObject> : ParentService<TSourceObject>
     where TSourceObject : ChildObject
 {

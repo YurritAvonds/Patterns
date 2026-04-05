@@ -1,33 +1,32 @@
-﻿using Newtonsoft.Json;
-using Patterns.Personal.TypeChecker;
+﻿using Patterns.Personal.Serializers.Concept;
+using Patterns.Personal.TypeChecker.Concept;
 using System.Collections;
+using System.Text;
+using System.Xml;
 
-namespace Patterns.Personal.Serializers;
+namespace Patterns.Personal.Serializers.Examples;
 
-public class JsonSerializer() : ISerializer
+public class XmlSerializer(XmlWriterSettings settings) : ISerializer
 {
     /// <summary>
-    /// Convert C# objects to corresponding JSON representation.
+    /// Convert C# objects to corresponding XML representation.
     /// </summary>
     /// <param name="rootObject">The object to be serialized.</param>
     /// <returns></returns>
     public string Serialize(object rootObject)
     {
-        var stringWriter = new StringWriter();
-        using (var writer = new JsonTextWriter(stringWriter)
+        var stringBuilder = new StringBuilder();
+        using (var writer = XmlWriter.Create(stringBuilder, settings))
         {
-            Formatting = Newtonsoft.Json.Formatting.Indented,
-        })
-        {
-            writer.WriteStartObject();
+            writer.WriteStartElement(rootObject.GetType().Name);
             Serialize(rootObject, writer);
-            writer.WriteEndObject();
+            writer.WriteEndElement();
         }
 
-        return stringWriter.ToString();
+        return stringBuilder.ToString();
     }
 
-    private void Serialize(object rootObject, JsonTextWriter writer)
+    private void Serialize(object rootObject, XmlWriter writer)
     {
         foreach (var property in rootObject.GetType().GetProperties())
         {
@@ -50,46 +49,43 @@ public class JsonSerializer() : ISerializer
         return;
     }
 
-    private static void SerializeSimpleType(JsonTextWriter writer, object? value, string name)
+    private static void SerializeSimpleType(XmlWriter writer, object? value, string name)
     {
-        writer.WritePropertyName(name);
-        writer.WriteValue(value != null
-            ? value.ToString()
-            : string.Empty);
+        writer.WriteStartElement(name);
+        if (value != null)
+        {
+            writer.WriteString(value.ToString());
+        }
+        writer.WriteEndElement();
 
         return;
     }
 
-    private void SerializeObject(JsonTextWriter writer, object? value, string name)
+    private void SerializeObject(XmlWriter writer, object? value, string name)
     {
-        if (writer.WriteState != WriteState.Array)
-        {
-            writer.WritePropertyName(name);
-        }
-        writer.WriteStartObject();
+        writer.WriteStartElement(name);
         if (value != null)
         {
             Serialize(value, writer);
         }
-        writer.WriteEndObject();
+        writer.WriteEndElement();
 
         return;
     }
 
-    private void SerializeCollection(JsonTextWriter writer, object? value, string name)
+    private void SerializeCollection(XmlWriter writer, object? value, string name)
     {
         if (value == null)
         {
             return;
         }
 
-        writer.WritePropertyName(name);
-        writer.WriteStartArray();
+        writer.WriteStartElement(name);
         foreach (var item in (IEnumerable)value)
         {
             SerializeObject(writer, item, item.GetType().Name.ToString());
         }
-        writer.WriteEndArray();
+        writer.WriteEndElement();
 
         return;
     }

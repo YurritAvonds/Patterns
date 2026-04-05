@@ -1,4 +1,4 @@
-﻿namespace Patterns.Personal.Serializers;
+﻿namespace Patterns.Personal.Serializers.Concept;
 
 public interface ISerializer
 {

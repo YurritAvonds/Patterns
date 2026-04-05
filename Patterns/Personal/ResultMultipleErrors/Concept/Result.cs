@@ -1,6 +1,6 @@
 ﻿using Patterns.Standard.Result;
 
-namespace Patterns.Personal.ResultVariant;
+namespace Patterns.Personal.ResultMultipleErrors.Concept;
 
 public record Result<T>
 {

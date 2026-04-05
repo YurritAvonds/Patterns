@@ -1,4 +1,4 @@
-﻿namespace Patterns.Personal.InheritedObjectTemplateMethod;
+﻿namespace Patterns.Personal.InheritedObjectTemplateMethod.Examples;
 
 public class ParentObject
 {

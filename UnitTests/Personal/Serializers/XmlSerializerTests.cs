@@ -1,16 +1,25 @@
 ﻿using FluentAssertions;
-using Newtonsoft.Json.Linq;
-using Patterns.Personal.Serializers;
+using Patterns.Personal.Serializers.Examples;
+using System.Xml;
+using System.Xml.Linq;
+using UnitTests.Personal.Serializers.Examples;
 
-namespace UnitTests.Personal;
+namespace UnitTests.Personal.Serializers;
 
-internal class JsonSerializerTests
+internal class XmlSerializerTests
 {
-    private readonly JsonSerializer jsonSerializer;
+    private readonly XmlSerializer xmlSerializer;
 
-    public JsonSerializerTests()
+    public XmlSerializerTests()
     {
-        jsonSerializer = new JsonSerializer();
+        xmlSerializer = new XmlSerializer(
+            new XmlWriterSettings
+            {
+                Indent = true,
+                OmitXmlDeclaration = true,
+                ConformanceLevel = ConformanceLevel.Auto
+            }
+        );
     }
 
     [Test]
@@ -26,10 +35,11 @@ internal class JsonSerializerTests
         };
 
         // Act
-        var result = jsonSerializer.Serialize(leaf);
+        var result = xmlSerializer.Serialize(leaf);
 
         // Assert
-        var doc = JObject.Parse(result);
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Leaf");
         AssertLeaf(doc,
             leafString: input,
             leafInteger: string.Empty,
@@ -47,10 +57,11 @@ internal class JsonSerializerTests
         };
 
         // Act
-        var result = jsonSerializer.Serialize(leaf);
+        var result = xmlSerializer.Serialize(leaf);
 
         // Assert
-        var doc = JObject.Parse(result);
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Leaf");
         AssertLeaf(doc,
             leafString: string.Empty,
             leafInteger: string.Empty,
@@ -71,10 +82,11 @@ internal class JsonSerializerTests
         };
 
         // Act
-        var result = jsonSerializer.Serialize(leaf);
+        var result = xmlSerializer.Serialize(leaf);
 
         // Assert
-        var doc = JObject.Parse(result);
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Leaf");
         AssertLeaf(doc,
             leafString: string.Empty,
             leafInteger: expected,
@@ -92,10 +104,11 @@ internal class JsonSerializerTests
         };
 
         // Act
-        var result = jsonSerializer.Serialize(leaf);
+        var result = xmlSerializer.Serialize(leaf);
 
         // Assert
-        var doc = JObject.Parse(result);
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Leaf");
         AssertLeaf(doc,
             leafString: string.Empty,
             leafInteger: string.Empty,
@@ -115,10 +128,11 @@ internal class JsonSerializerTests
         };
 
         // Act
-        var result = jsonSerializer.Serialize(leaf);
+        var result = xmlSerializer.Serialize(leaf);
 
         // Assert
-        var doc = JObject.Parse(result);
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Leaf");
         AssertLeaf(doc,
             leafString: string.Empty,
             leafInteger: string.Empty,
@@ -136,10 +150,11 @@ internal class JsonSerializerTests
         };
 
         // Act
-        var result = jsonSerializer.Serialize(leaf);
+        var result = xmlSerializer.Serialize(leaf);
 
         // Assert
-        var doc = JObject.Parse(result);
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Leaf");
         AssertLeaf(doc,
             leafString: string.Empty,
             leafInteger: string.Empty,
@@ -157,14 +172,16 @@ internal class JsonSerializerTests
         };
 
         // Act
-        var result = jsonSerializer.Serialize(root);
+        var result = xmlSerializer.Serialize(root);
 
         // Assert
-        var doc = JObject.Parse(result);
-        doc["RootString"]?.Value<string>().Should().BeEmpty();
-        doc["RootObject"]?.Should().BeEmpty();
-        doc["RootInteger"]?.Value<string>().Should().BeEmpty();
-        doc["RootObjects"]?.ToList().Should().BeEmpty();
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Root");
+
+        doc.Element("RootObject")?.Value.Should().BeEmpty();
+        doc.Element("RootString")?.Value.Should().BeEmpty();
+        doc.Element("RootInteger")?.Value.Should().BeEmpty();
+        doc.Element("RootObjects")?.Value.Should().BeEmpty();
     }
 
     [Test]
@@ -178,17 +195,19 @@ internal class JsonSerializerTests
         };
 
         // Act
-        var result = jsonSerializer.Serialize(root);
+        var result = xmlSerializer.Serialize(root);
 
         // Assert
-        var doc = JObject.Parse(result);
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Root");
+
         AssertLeaf(doc,
             leafString: string.Empty,
             leafInteger: string.Empty,
             leafBoolean: string.Empty);
-        doc["RootString"]?.Value<string>().Should().BeEmpty();
-        doc["RootInteger"]?.Value<string>().Should().BeEmpty();
-        doc["RootObjects"]?.ToList().Should().BeEmpty();
+        doc.Element("RootString")?.Value.Should().BeEmpty();
+        doc.Element("RootInteger")?.Value.Should().BeEmpty();
+        doc.Element("RootObjects")?.Value.Should().BeEmpty();
     }
 
     [Test]
@@ -207,12 +226,14 @@ internal class JsonSerializerTests
         });
 
         // Act
-        var result = jsonSerializer.Serialize(root);
+        var result = xmlSerializer.Serialize(root);
 
         // Assert
-        var doc = JObject.Parse(result);
-        doc["RootObjects"]?.ToList()[0]["NodeString"]?.Value<string>().Should().Be("Object1");
-        doc["RootObjects"]?.ToList()[1]["NodeString"]?.Value<string>().Should().Be("Object2");
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Root");
+
+        doc.Element("RootObjects")?.Elements("Node")?.ToList()[0].Element("NodeString")?.Value.Should().Be("Object1");
+        doc.Element("RootObjects")?.Elements("Node")?.ToList()[1].Element("NodeString")?.Value.Should().Be("Object2");
     }
 
     [Test]
@@ -226,11 +247,13 @@ internal class JsonSerializerTests
         };
 
         // Act
-        var result = jsonSerializer.Serialize(root);
+        var result = xmlSerializer.Serialize(root);
 
         // Assert
-        var doc = JObject.Parse(result);
-        doc["RootObjects"]?.ToList().Should().BeEmpty();
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Root");
+
+        doc.Element("RootObjects")?.Elements("Node")?.Should().BeEmpty();
     }
 
     [Test]
@@ -244,11 +267,13 @@ internal class JsonSerializerTests
         };
 
         // Act
-        var result = jsonSerializer.Serialize(root);
+        var result = xmlSerializer.Serialize(root);
 
         // Assert
-        var doc = JObject.Parse(result);
-        doc["RootObjects"]?.Should().BeEmpty();
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Root");
+
+        doc.Element("RootObjects")?.Should().BeNull();
     }
 
     [Test]
@@ -260,28 +285,29 @@ internal class JsonSerializerTests
         rootObject.RootObjects?.Add(new Node());
 
         // Act
-        var result = jsonSerializer.Serialize(rootObject);
+        var result = xmlSerializer.Serialize(rootObject);
 
         // Assert
-        var doc = JObject.Parse(result);
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Root");
 
-        doc["RootObject"].Should().NotBeNull();
-        doc["RootObject"]?.Should().BeEmpty();
+        doc.Element("RootObject").Should().NotBeNull();
+        doc.Element("RootObject")?.Value.Should().BeEmpty();
 
-        doc["RootString"].Should().NotBeNull();
-        doc["RootString"]?.Should().BeEmpty();
+        doc.Element("RootString").Should().NotBeNull();
+        doc.Element("RootString")?.Value.Should().BeEmpty();
 
-        doc["RootInteger"].Should().NotBeNull();
-        doc["RootInteger"]?.Should().BeEmpty();
+        doc.Element("RootInteger").Should().NotBeNull();
+        doc.Element("RootInteger")?.Value.Should().BeEmpty();
 
-        doc["RootObjects"].Should().NotBeNull();
-        doc["RootObjects"]?.ToList().Should().HaveCount(1);
-        doc["RootObjects"]?.ToList()[0]["NodeString"]?.Should().NotBeNull();
-        doc["RootObjects"]?.ToList()[0]["NodeString"]?.Should().BeEmpty();
-        doc["RootObjects"]?.ToList()[0]["NodeObject"]?.Should().NotBeNull();
-        doc["RootObjects"]?.ToList()[0]["NodeObject"]?.Should().BeEmpty();
-        doc["RootObjects"]?.ToList()[0]["NodeObjects"]?.Should().NotBeNull();
-        doc["RootObjects"]?.ToList()[0]["NodeObjects"]?.Should().BeEmpty();
+        doc.Element("RootObjects").Should().NotBeNull();
+        doc.Element("RootObjects")?.Elements("Node").ToList().Should().HaveCount(1);
+        doc.Element("RootObjects")?.Elements("Node").ToList()[0].Element("NodeString").Should().NotBeNull();
+        doc.Element("RootObjects")?.Elements("Node")?.ToList()[0].Element("NodeString")?.Value.Should().BeEmpty();
+        doc.Element("RootObjects")?.Elements("Node").ToList()[0].Element("NodeObject").Should().NotBeNull();
+        doc.Element("RootObjects")?.Elements("Node")?.ToList()[0].Element("NodeObject")?.Value.Should().BeEmpty();
+        doc.Element("RootObjects")?.Elements("Node").ToList()[0].Element("NodeObjects").Should().NotBeNull();
+        doc.Element("RootObjects")?.Elements("Node")?.ToList()[0].Element("NodeObjects")?.Elements().Should().BeEmpty();
     }
 
     [Test]
@@ -326,54 +352,44 @@ internal class JsonSerializerTests
         });
 
         // Act
-        var result = jsonSerializer.Serialize(rootObject);
+        var result = xmlSerializer.Serialize(rootObject);
 
         // Assert
-        var doc = JObject.Parse(result);
+        var doc = XElement.Parse(result);
+        doc.Name.LocalName.Should().Be("Root");
 
-        doc["RootString"]?.Value<string>().Should().Be("L1_String");
-        doc["RootInteger"]?.Value<string>().Should().Be("1");
+        doc.Element("RootString")?.Value.Should().Be("L1_String");
+        doc.Element("RootInteger")?.Value.Should().Be("1");
 
         AssertLeaf(
-            doc["RootObject"],
+            doc.Element("RootObject"),
             "L2_String",
             "2",
             "True");
 
-        doc["RootObjects"]?.First()["NodeString"]?.Value<string>().Should().Be("L1_String");
-        doc["RootObjects"]?.First()["NodeObject"]?["NodeString"]?.Value<string>().Should().Be("L2_String");
+        doc.Element("RootObjects")?.Element("Node")?.Element("NodeString")?.Value.Should().Be("L1_String");
+        doc.Element("RootObjects")?.Element("Node")?.Element("NodeObject")?.Element("NodeString")?.Value.Should().Be("L2_String");
         AssertLeaf(
-            doc["RootObjects"]?.First()["NodeObject"]?["NodeObjects"]?.First(),
+            doc.Element("RootObjects")?.Element("Node")?.Element("NodeObject")?.Element("NodeObjects")?.Element("Leaf"),
             "L2_Coll_Obj",
             "2",
             "False");
 
         AssertLeaf(
-            doc["RootObjects"]?.First()["NodeObjects"]?.First(),
+            doc.Element("RootObjects")?.Element("Node")?.Element("NodeObjects")?.Element("Leaf"),
             "L1_Coll_Obj",
             "1",
             "False");
     }
 
-    private static void AssertLeaf(JToken? leaf, string leafString, string leafInteger, string leafBoolean)
+    private static void AssertLeaf(XElement? leaf, string leafString, string leafInteger, string leafBoolean)
     {
         leaf.Should().NotBeNull();
-        leaf["LeafBoolean"]?.Value<string>().Should().NotBeNull();
-        leaf["LeafBoolean"]?.Value<string>().Should().Be(leafBoolean);
-        leaf["LeafString"]?.Value<string>().Should().NotBeNull();
-        leaf["LeafString"]?.Value<string>().Should().Be(leafString);
-        leaf["LeafInteger"]?.Value<string>().Should().NotBeNull();
-        leaf["LeafInteger"]?.Value<string>().Should().Be(leafInteger);
-    }
-
-    private static void AssertLeaf(JObject? leaf, string leafString, string leafInteger, string leafBoolean)
-    {
-        leaf.Should().NotBeNull();
-        leaf["LeafBoolean"]?.Value<string>().Should().NotBeNull();
-        leaf["LeafBoolean"]?.Value<string>().Should().Be(leafBoolean);
-        leaf["LeafString"]?.Value<string>().Should().NotBeNull();
-        leaf["LeafString"]?.Value<string>().Should().Be(leafString);
-        leaf["LeafInteger"]?.Value<string>().Should().NotBeNull();
-        leaf["LeafInteger"]?.Value<string>().Should().Be(leafInteger);
+        leaf.Element("LeafBoolean")?.Value.Should().NotBeNull();
+        leaf.Element("LeafBoolean")?.Value.Should().Be(leafBoolean);
+        leaf.Element("LeafString")?.Value.Should().NotBeNull();
+        leaf.Element("LeafString")?.Value.Should().Be(leafString);
+        leaf.Element("LeafInteger")?.Value.Should().NotBeNull();
+        leaf.Element("LeafInteger")?.Value.Should().Be(leafInteger);
     }
 }

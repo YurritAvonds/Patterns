@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.ComponentModel;
 
-namespace Patterns.Personal.TypeChecker;
+namespace Patterns.Personal.TypeChecker.Concept;
 
 public static class TypeChecker
 {

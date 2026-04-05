@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using Patterns.Standard.Result;
-using OuterOperation = Patterns.Personal.ResultVariant.OuterOperation;
+using OuterOperation = Patterns.Personal.ResultMultipleErrors.Examples.OuterOperation;
 
 namespace UnitTests.Personal;
 

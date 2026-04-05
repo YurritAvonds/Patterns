@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using Patterns.Personal.InheritedModification;
+using UnitTests.Personal.InheritedModificationTesting.Examples;
 
-namespace UnitTests.Personal;
+namespace UnitTests.Personal.InheritedModificationTesting;
 
 internal class InheritedModificationChildTests : InheritedModificationParentTests
 {

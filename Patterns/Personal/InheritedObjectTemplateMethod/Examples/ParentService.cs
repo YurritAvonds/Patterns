@@ -1,7 +1,10 @@
-﻿using System.Globalization;
+﻿namespace Patterns.Personal.InheritedObjectTemplateMethod.Examples;
 
-namespace Patterns.Personal.InheritedObjectTemplateMethod;
-
+/// <summary>
+/// Parent Service defines all steps that go into creating the result and virtual basic methods for
+/// each of the steps.
+/// </summary>
+/// <typeparam name="TSourceObject">The type of object that will be handled by the service.</typeparam>
 public class ParentService<TSourceObject>
     where TSourceObject : ParentObject
 {
