@@ -1,11 +1,9 @@
-﻿using Patterns.Standard.Factory;
-
-namespace Patterns.Standard.AbstractFactory;
+﻿namespace Patterns.Standard.Factory;
 
 /// <summary>
 /// The client determines which factory to use based on a setting.
 /// </summary>
-public class Client
+public class AbstractFactoryClient
 {
     private IFactory? factory;
 

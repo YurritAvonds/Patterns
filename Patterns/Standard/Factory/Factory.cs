@@ -1,6 +1,4 @@
-﻿using Patterns.Standard.AbstractFactory;
-
-namespace Patterns.Standard.Factory;
+﻿namespace Patterns.Standard.Factory;
 
 /// <summary>
 /// (Optional) factory base class that contains shared methods common to all factory types.

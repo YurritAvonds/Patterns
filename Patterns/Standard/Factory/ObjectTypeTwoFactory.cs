@@ -1,7 +1,4 @@
-﻿
-using Patterns.Standard.AbstractFactory;
-
-namespace Patterns.Standard.Factory;
+﻿namespace Patterns.Standard.Factory;
 
 /// <summary>
 /// Factory that produces objects of type two.

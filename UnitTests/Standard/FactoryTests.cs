@@ -6,6 +6,7 @@ namespace UnitTests.Standard;
 public class FactoryTests
 {
     [Test]
+    [Category("Factory")]
     public void ObjectTypeOneFactory()
     {
         // Arrange
@@ -28,6 +29,7 @@ public class FactoryTests
     }
 
     [Test]
+    [Category("Factory")]
     public void ObjectTypeTwoFactory()
     {
         // Arrange
@@ -47,5 +49,22 @@ public class FactoryTests
         results[1].TypeTwoProperty.Should().Be("Beta");
         results[2].CommonProperty.Should().Be(4.5);
         results[2].TypeTwoProperty.Should().Be("Alpha");
+    }
+
+    [TestCase(FactoryType.One, false, false, true)]
+    [TestCase(FactoryType.Two, true, true, false)]
+    [Category("Abstract Factory")]
+    public void Produce(FactoryType factoryType, bool expected1, bool expected2, bool expected3)
+    {
+        // Arrange
+        var client = new AbstractFactoryClient();
+
+        // Act
+        var products = client.Produce(factoryType).ToList();
+
+        // Assert
+        products[0].Method().Should().Be(expected1);
+        products[1].Method().Should().Be(expected2);
+        products[2].Method().Should().Be(expected3);
     }
 }

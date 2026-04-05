@@ -1,6 +1,4 @@
-﻿using Patterns.Standard.Factory;
-
-namespace Patterns.Standard.AbstractFactory;
+﻿namespace Patterns.Standard.Factory;
 
 /// <summary>
 /// By adding this interface, the client can interact with the factory without needing to know the specific type
