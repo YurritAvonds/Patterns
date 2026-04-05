@@ -1,4 +1,6 @@
-﻿namespace Patterns.Standard.Command;
+﻿using Patterns.Standard.Command.Concept;
+
+namespace Patterns.Standard.Command.Examples;
 
 public class IncrementIntegerCommand(Receiver receiver) : ICommand
 {

@@ -1,4 +1,4 @@
-﻿namespace Patterns.Standard.Command;
+﻿namespace Patterns.Standard.Command.Examples;
 
 public class Receiver
 {

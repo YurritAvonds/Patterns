@@ -1,4 +1,4 @@
-﻿namespace Patterns.Standard.ChainOfResponsibility;
+﻿namespace Patterns.Standard.ChainOfResponsibility.Examples;
 
 public class Context
 {

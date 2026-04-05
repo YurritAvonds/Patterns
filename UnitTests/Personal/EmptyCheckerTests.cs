@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Patterns.Personal.EmptyChecker;
+using Patterns.Personal.EmptyChecker.Examples;
 
 namespace UnitTests.Personal;
 

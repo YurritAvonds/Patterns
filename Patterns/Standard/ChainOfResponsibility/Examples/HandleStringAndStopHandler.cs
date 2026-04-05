@@ -1,4 +1,6 @@
-﻿namespace Patterns.Standard.ChainOfResponsibility;
+﻿using Patterns.Standard.ChainOfResponsibility.Concept;
+
+namespace Patterns.Standard.ChainOfResponsibility.Examples;
 
 public class HandleStringAndStopHandler(IHandler? nextHandler) : BaseHandler(nextHandler)
 {

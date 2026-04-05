@@ -1,4 +1,4 @@
-﻿namespace Patterns.Standard.Builder;
+﻿namespace Patterns.Standard.Builder.Examples;
 
 public class BuildableObject
 {

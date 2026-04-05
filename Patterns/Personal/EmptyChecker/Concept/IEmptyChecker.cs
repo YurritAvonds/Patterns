@@ -1,4 +1,4 @@
-﻿namespace Patterns.Personal.EmptyChecker;
+﻿namespace Patterns.Personal.EmptyChecker.Concept;
 
 public interface IEmptyChecker
 {

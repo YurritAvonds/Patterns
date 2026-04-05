@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Patterns.Personal.InheritedBuilder;
+using Patterns.Personal.InheritedBuilder.Examples;
 
 namespace UnitTests.Personal;
 

@@ -1,4 +1,6 @@
-﻿namespace Patterns.Standard.ChainOfResponsibility;
+﻿using Patterns.Standard.ChainOfResponsibility.Examples;
+
+namespace Patterns.Standard.ChainOfResponsibility.Concept;
 
 /// <summary>
 /// Basic implementation of the chain of responsibility pattern for handling requests.

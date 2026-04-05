@@ -1,4 +1,4 @@
-﻿namespace Patterns.Standard.Command;
+﻿namespace Patterns.Standard.Command.Concept;
 
 public interface ICommand
 {

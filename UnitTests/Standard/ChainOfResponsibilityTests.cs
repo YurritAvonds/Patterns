@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Patterns.Standard.ChainOfResponsibility;
+using Patterns.Standard.ChainOfResponsibility.Examples;
 
 namespace UnitTests.Standard;
 

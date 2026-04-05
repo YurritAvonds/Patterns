@@ -1,5 +1,9 @@
-﻿namespace Patterns.Personal.InheritedBuilder;
+﻿namespace Patterns.Personal.InheritedBuilder.Examples;
 
+/// <summary>
+/// Convenience wrapper class that inherits from the generic base builder class with the type parameters set
+/// so that you can initialize a builder without having to specify the type parameters.
+/// </summary>
 public class ThirdBuilder : ThirdBuilder<ThirdObject, ThirdBuilder>
 {
     public ThirdBuilder() : base()

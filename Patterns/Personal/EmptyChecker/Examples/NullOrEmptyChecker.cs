@@ -1,6 +1,7 @@
-﻿using System.Collections;
+﻿using Patterns.Personal.EmptyChecker.Concept;
+using System.Collections;
 
-namespace Patterns.Personal.EmptyChecker;
+namespace Patterns.Personal.EmptyChecker.Examples;
 
 /// <summary>
 /// Checks whether an object is null or all of its properties are null or empty collections.

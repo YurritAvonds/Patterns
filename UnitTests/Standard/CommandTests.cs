@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
-using Patterns.Standard.Command;
+using Patterns.Standard.Command.Concept;
+using Patterns.Standard.Command.Examples;
 
 namespace UnitTests.Standard;
 

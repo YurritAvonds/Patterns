@@ -1,4 +1,6 @@
-﻿namespace Patterns.Personal.EmptyChecker;
+﻿using Patterns.Personal.EmptyChecker.Concept;
+
+namespace Patterns.Personal.EmptyChecker.Examples;
 
 /// <summary>
 /// Parent class that can check whether it is empty using the provided IEmptyChecker implementation.
