@@ -1,4 +1,6 @@
-﻿namespace UnitTests.Standard;
+﻿using Patterns.Standard.Singleton.Examples;
+
+namespace UnitTests.Standard;
 
 [TestFixture]
 public class SingletonTests
@@ -7,12 +9,12 @@ public class SingletonTests
     public void FirstMethod_ReturnsFirstProperty()
     {
         // Arrange
-        Patterns.Standard.Singleton.Singleton.GetInstance().FirstProperty = 42;
+        ExampleSingleton.GetInstance().FirstProperty = 42;
 
         // Act
-        Patterns.Standard.Singleton.Singleton.GetInstance().FirstProperty = 50;
+        ExampleSingleton.GetInstance().FirstProperty = 50;
 
         // Assert
-        Patterns.Standard.Singleton.Singleton.GetInstance().FirstProperty.Should().Be(50);
+        ExampleSingleton.GetInstance().FirstProperty.Should().Be(50);
     }
 }

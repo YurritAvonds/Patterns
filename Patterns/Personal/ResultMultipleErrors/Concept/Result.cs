@@ -1,4 +1,4 @@
-﻿using Patterns.Standard.Result;
+﻿using Patterns.Standard.Result.Concept;
 
 namespace Patterns.Personal.ResultMultipleErrors.Concept;
 

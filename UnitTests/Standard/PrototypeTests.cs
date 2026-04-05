@@ -1,4 +1,4 @@
-﻿using Patterns.Standard.Prototype;
+﻿using Patterns.Standard.Prototype.Examples;
 
 namespace UnitTests.Standard;
 

@@ -1,4 +1,4 @@
-﻿using Patterns.Standard.Proxy;
+﻿using Patterns.Standard.Proxy.Examples;
 
 namespace UnitTests.Standard;
 

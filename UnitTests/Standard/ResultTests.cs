@@ -1,4 +1,5 @@
-﻿using Patterns.Standard.Result;
+﻿using Patterns.Standard.Result.Concept;
+using Patterns.Standard.Result.Examples;
 
 namespace UnitTests.Standard;
 

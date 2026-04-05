@@ -1,5 +1,5 @@
 ﻿using Patterns.Personal.ResultMultipleErrors.Examples;
-using Errors = Patterns.Standard.Result.Errors;
+using Errors = Patterns.Standard.Result.Concept.Errors;
 
 namespace UnitTests.Personal;
 

@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Patterns.Standard.Composite;
+﻿using Patterns.Standard.Composite.Examples;
 
 namespace UnitTests.Standard;
 

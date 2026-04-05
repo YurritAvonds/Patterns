@@ -1,4 +1,4 @@
-﻿using Patterns.Standard.Observer;
+﻿using Patterns.Standard.Observer.Examples;
 
 namespace UnitTests.Standard;
 

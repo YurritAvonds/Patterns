@@ -1,4 +1,4 @@
-﻿using Patterns.Standard.Facade;
+﻿using Patterns.Standard.Facade.Examples;
 
 namespace UnitTests.Standard;
 

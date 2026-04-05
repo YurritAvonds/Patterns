@@ -1,4 +1,4 @@
-﻿using Patterns.Standard.Mediator;
+﻿using Patterns.Standard.Mediator.Examples;
 
 namespace UnitTests.Standard;
 

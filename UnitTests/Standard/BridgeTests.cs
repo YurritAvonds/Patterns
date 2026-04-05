@@ -1,4 +1,4 @@
-﻿using Patterns.Standard.Bridge;
+﻿using Patterns.Standard.Bridge.Examples;
 
 namespace UnitTests.Standard;
 

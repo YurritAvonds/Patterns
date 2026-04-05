@@ -1,4 +1,4 @@
-﻿using Patterns.Standard.Factory;
+﻿using Patterns.Standard.Factory.Examples;
 
 namespace UnitTests.Standard;
 
@@ -13,9 +13,9 @@ public class FactoryTests
         var results = new List<ObjectTypeOne>();
 
         // Act
-        foreach (ObjectTypeOne item in factory)
+        foreach (var item in factory)
         {
-            results.Add(item);
+            results.Add((ObjectTypeOne)item);
         }
 
         // Assert
@@ -36,9 +36,9 @@ public class FactoryTests
         var results = new List<ObjectTypeTwo>();
 
         // Act
-        foreach (ObjectTypeTwo item in factory)
+        foreach (var item in factory)
         {
-            results.Add(item);
+            results.Add((ObjectTypeTwo)item);
         }
 
         // Assert

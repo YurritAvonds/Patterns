@@ -1,4 +1,4 @@
-﻿using Patterns.Standard.Decorator;
+﻿using Patterns.Standard.Decorator.Examples;
 
 namespace UnitTests.Standard;
 
@@ -9,7 +9,7 @@ internal class DecoratorTests
     {
         // Arrange
         var component = new Component();
-        var firstDecorator = new FirstDecorator(component);
+        var firstDecorator = new DecoratorOne(component);
 
         // Act
         var result = firstDecorator.Execute();
@@ -23,7 +23,7 @@ internal class DecoratorTests
     {
         // Arrange
         var component = new Component();
-        var secondDecorator = new SecondDecorator(component);
+        var secondDecorator = new DecoratorTwo(component);
 
         // Act
         var result = secondDecorator.Execute();
@@ -37,8 +37,8 @@ internal class DecoratorTests
     {
         // Arrange
         var component = new Component();
-        var firstDecorator = new FirstDecorator(component);
-        var secondDecorator = new SecondDecorator(firstDecorator);
+        var firstDecorator = new DecoratorOne(component);
+        var secondDecorator = new DecoratorTwo(firstDecorator);
 
         // Act
         var result = secondDecorator.Execute();

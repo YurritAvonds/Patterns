@@ -1,4 +1,4 @@
-﻿using Patterns.Standard.Flyweight;
+﻿using Patterns.Standard.Flyweight.Examples;
 
 namespace UnitTests.Standard;
 

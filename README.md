@@ -2,6 +2,8 @@
 
 Reference repository containing a number of design patterns and other concepts/structures. Intended as a source of inspiration and to be able to quickly understand and try out these concepts through their corresponding unit tests.
 
+Files in **Concept** subfolders are intented to be reusable as-is, whereas files in **Examples** subfolders are intended to illustrate how a pattern can be implemented but will need to be adapted to your specific use case.
+
 ## Doxygen Documentation
 
 [Documentation](https://yurritavonds.github.io/Patterns/)

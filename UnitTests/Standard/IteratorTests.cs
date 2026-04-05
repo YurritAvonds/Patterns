@@ -1,4 +1,4 @@
-﻿using Patterns.Standard.Iterator;
+﻿using Patterns.Standard.Iterator.Examples;
 
 namespace UnitTests.Standard;
 
@@ -22,7 +22,7 @@ internal class IteratorTests
         var results = new List<string>();
         while (iterator.HasMore())
         {
-            results.Add(iterator.GetNext().Name);
+            results.Add(((Item)iterator.GetNext()).Name);
         }
 
         // Assert
@@ -51,7 +51,7 @@ internal class IteratorTests
         var results = new List<string>();
         while (iterator.HasMore())
         {
-            results.Add(iterator.GetNext().Name);
+            results.Add(((Item)iterator.GetNext()).Name);
         }
 
         // Assert
@@ -75,7 +75,7 @@ internal class IteratorTests
         var results = new List<string>();
         while (iterator.HasMore())
         {
-            results.Add(iterator.GetNext().Name);
+            results.Add(((Item)iterator.GetNext()).Name);
         }
 
         // Assert
@@ -96,7 +96,7 @@ internal class IteratorTests
         var results = new List<string>();
         while (iterator.HasMore())
         {
-            results.Add(iterator.GetNext().Name);
+            results.Add(((Item)iterator.GetNext()).Name);
         }
 
         // Assert
@@ -116,7 +116,7 @@ internal class IteratorTests
         var results = new List<string>();
         while (iterator.HasMore())
         {
-            results.Add(iterator.GetNext().Name);
+            results.Add(((Item)iterator.GetNext()).Name);
         }
 
         // Assert

@@ -1,4 +1,4 @@
-﻿using Patterns.Standard.Memento;
+﻿using Patterns.Standard.Memento.Examples;
 
 namespace UnitTests.Standard;
 
