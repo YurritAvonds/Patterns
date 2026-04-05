@@ -1,6 +1,6 @@
 ﻿namespace Patterns.Standard.ChainOfResponsibility;
 
-public class IntegerHandler(IHandler? nextHandler) : BaseHandler(nextHandler)
+public class HandleIntegerAndContinueHandler(IHandler? nextHandler) : BaseHandler(nextHandler)
 {
     override public void Handle(Request request, Context context)
     {
