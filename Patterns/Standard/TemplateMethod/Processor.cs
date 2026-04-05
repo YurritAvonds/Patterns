@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Patterns.Standard.TemplateMethod;
+﻿namespace Patterns.Standard.TemplateMethod;
 
 public class Processor
 {
