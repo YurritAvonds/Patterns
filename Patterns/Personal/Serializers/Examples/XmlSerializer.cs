@@ -91,34 +91,14 @@ public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMo
 
         writer.WriteStartElement(name);
 
-        var valueAsCollection = (ICollection)value;
-        var elementType = TypeChecker.Concept.TypeChecker.GetCollectionElementType(value.GetType());
-
-        // Empty collection
         if (collectionMode == CollectionSerializationMode.SingleObjectInEmptyCollection
-            && elementType != null
             && !((IEnumerable)value).Cast<object>().Any())
         {
-            // TODO handle string type here
-            if (elementType.Equals(typeof(string)))
-            {
-                writer.WriteStartElement(nameof(String));
-                writer.WriteEndElement();
-            }
-            else
-            {
-                var instance = Activator.CreateInstance(elementType);
-                if (instance != null)
-                {
-                    writer.WriteStartElement(instance.GetType().Name);
-                    Serialize(instance, writer);
-                    writer.WriteEndElement();
-                }
-            }
+            SerializeEmptyCollectionObject(writer, value);
         }
 
         // Filled collection
-        foreach (var item in valueAsCollection)
+        foreach (var item in (ICollection)value)
         {
             writer.WriteStartElement(item.GetType().Name);
             Serialize(item, writer);
@@ -128,5 +108,27 @@ public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMo
         writer.WriteEndElement();
 
         return;
+    }
+
+    private void SerializeEmptyCollectionObject(XmlWriter writer, object value)
+    {
+        if (TypeChecker.Concept.TypeChecker.GetCollectionElementType(value.GetType()) is not Type elementType)
+        {
+            return;
+        }
+
+        if (elementType.Equals(typeof(string)))
+        {
+            writer.WriteStartElement(nameof(String));
+            writer.WriteEndElement();
+            return;
+        }
+
+        if (Activator.CreateInstance(elementType) is object instance)
+        {
+            writer.WriteStartElement(instance.GetType().Name);
+            Serialize(instance, writer);
+            writer.WriteEndElement();
+        }
     }
 }
