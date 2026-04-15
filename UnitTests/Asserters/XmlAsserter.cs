@@ -6,6 +6,6 @@ internal static class XmlAsserter
 {
     public static void HasValue(this XElement? element, string expectedValue)
     {
-
+        element?.Value.Should().Be(expectedValue);
     }
 }

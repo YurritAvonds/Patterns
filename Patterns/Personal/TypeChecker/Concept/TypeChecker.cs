@@ -53,4 +53,28 @@ public static class TypeChecker
             && type.IsClass
             && type != typeof(string);
     }
+
+    public static Type? GetCollectionElementType(Type collectionType)
+    {
+        // Handle arrays
+        if (collectionType.IsArray)
+        {
+            return collectionType.GetElementType();
+        }
+
+        // Handle generic collections (List<T>, IEnumerable<T>, etc.)
+        if (collectionType.IsGenericType)
+        {
+            return collectionType.GetGenericArguments().First();
+        }
+
+        // Fallback: try IEnumerable<T> interface
+        var enumerableInterface = collectionType
+            .GetInterfaces()
+            .FirstOrDefault(i =>
+                i.IsGenericType &&
+                i.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+
+        return enumerableInterface?.GetGenericArguments().First();
+    }
 }

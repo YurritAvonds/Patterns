@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace Patterns.Personal.Serializers.Examples;
 
-public class XmlSerializer(XmlWriterSettings settings) : ISerializer
+public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMode collectionMode) : ISerializer
 {
     /// <summary>
     /// Convert C# objects to corresponding XML representation.
@@ -90,10 +90,28 @@ public class XmlSerializer(XmlWriterSettings settings) : ISerializer
         }
 
         writer.WriteStartElement(name);
-        foreach (var item in (IEnumerable)value)
+
+        var valueAsCollection = (ICollection)value;
+        var elementType = TypeChecker.Concept.TypeChecker.GetCollectionElementType(value.GetType());
+
+        // Empty collection
+        if (collectionMode == CollectionSerializationMode.SingleObjectInEmptyCollection
+            && elementType != null
+            && !((IEnumerable)value).Cast<object>().Any())
+        {
+            var instance = Activator.CreateInstance(elementType);
+            if (instance != null)
+            {
+                Serialize(instance, writer);
+            }
+        }
+
+        // Filled collection
+        foreach (var item in valueAsCollection)
         {
             Serialize(item, writer);
         }
+
         writer.WriteEndElement();
 
         return;

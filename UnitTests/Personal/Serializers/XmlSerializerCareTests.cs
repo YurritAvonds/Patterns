@@ -1,4 +1,5 @@
-﻿using Patterns.Personal.Serializers.Examples;
+﻿using Patterns.Personal.Serializers.Concept;
+using Patterns.Personal.Serializers.Examples;
 using System.Xml;
 using System.Xml.Linq;
 using UnitTests.Asserters;
@@ -18,7 +19,8 @@ internal class XmlSerializerCareTests
                 Indent = true,
                 OmitXmlDeclaration = true,
                 ConformanceLevel = ConformanceLevel.Auto
-            }
+            },
+            CollectionSerializationMode.SingleObjectInEmptyCollection
         );
     }
 
