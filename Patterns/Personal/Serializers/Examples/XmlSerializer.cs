@@ -63,7 +63,22 @@ public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMo
         writer.WriteStartElement(name);
         if (value != null)
         {
-            writer.WriteString(value.ToString());
+            if (value is DateTime dateTime)
+            {
+                writer.WriteString(dateTime.ToString("yyyy-MM-dd HH:mm:ss zzz"));
+            }
+            else if (value is DateOnly dateOnly)
+            {
+                writer.WriteString(dateOnly.ToString("yyyy-MM-dd"));
+            }
+            else if (value is TimeOnly timeOnly)
+            {
+                writer.WriteString(timeOnly.ToString("HH:mm:ss zzz"));
+            }
+            else
+            {
+                writer.WriteString(value.ToString());
+            }
         }
         writer.WriteEndElement();
 
