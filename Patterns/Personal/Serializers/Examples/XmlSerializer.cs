@@ -120,7 +120,9 @@ public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMo
         // Filled collection
         foreach (var item in valueAsCollection)
         {
+            writer.WriteStartElement(item.GetType().Name);
             Serialize(item, writer);
+            writer.WriteEndElement();
         }
 
         writer.WriteEndElement();
