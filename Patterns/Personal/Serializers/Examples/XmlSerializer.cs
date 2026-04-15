@@ -99,10 +99,21 @@ public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMo
             && elementType != null
             && !((IEnumerable)value).Cast<object>().Any())
         {
-            var instance = Activator.CreateInstance(elementType);
-            if (instance != null)
+            // TODO handle string type here
+            if (elementType.Equals(typeof(string)))
             {
-                Serialize(instance, writer);
+                writer.WriteStartElement(nameof(String));
+                writer.WriteEndElement();
+            }
+            else
+            {
+                var instance = Activator.CreateInstance(elementType);
+                if (instance != null)
+                {
+                    writer.WriteStartElement(instance.GetType().Name);
+                    Serialize(instance, writer);
+                    writer.WriteEndElement();
+                }
             }
         }
 

@@ -2,5 +2,5 @@
 
 internal class Patient : Person
 {
-    public Status Status { get; set; }
+    public Status? Status { get; set; }
 }

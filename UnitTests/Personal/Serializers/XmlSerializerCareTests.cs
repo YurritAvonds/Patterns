@@ -37,6 +37,14 @@ internal class XmlSerializerCareTests
         // Assert
         var doc = XElement.Parse(result);
         doc.Name.LocalName.Should().Be("Report");
+
+        doc.Element("Patient").Elements("Names").First().Element("Use").HasEmptyValue();
+        doc.Element("Patient").Elements("Names").First().Element("Text").HasEmptyValue();
+        doc.Element("Patient").Elements("Names").First().Element("Family").HasEmptyValue();
+        doc.Element("Patient").Elements("Names").First().Element("Given").Elements("String").ToList()[0].HasEmptyValue();
+        // Check only one element in collection
+        doc.Element("Patient").Elements("Names").First().Elements("Prefix").Elements("String").ToList()[0].HasEmptyValue();
+        // Check only one element in collection
     }
 
     [Test]

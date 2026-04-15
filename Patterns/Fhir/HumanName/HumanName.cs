@@ -8,9 +8,9 @@ public class HumanName
     public Code? Use { get; set; }
     public string? Text { get; set; }
     public string? Family { get; set; }
-    public ICollection<string>? Given { get; set; }
-    public ICollection<string>? Prefix { get; set; }
-    public ICollection<string>? Suffix { get; set; }
+    public ICollection<string> Given { get; set; } = [];
+    public ICollection<string> Prefix { get; set; } = [];
+    public ICollection<string> Suffix { get; set; } = [];
     public DateTime? PeriodStart { get; set; }
     public DateTime? PeriodEnd { get; set; }
 
