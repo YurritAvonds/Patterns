@@ -28,6 +28,15 @@ public class XmlSerializer(XmlWriterSettings settings) : ISerializer
 
     private void Serialize(object rootObject, XmlWriter writer)
     {
+        var type = rootObject.GetType();
+
+        // Stop recursion for simple types
+        if (type.GetHighLevelType() == HighLevelType.Simple)
+        {
+            SerializeSimpleType(writer, rootObject, rootObject.GetType().Name);
+            return;
+        }
+
         foreach (var property in rootObject.GetType().GetProperties())
         {
             var value = property.GetValue(rootObject);
@@ -83,7 +92,7 @@ public class XmlSerializer(XmlWriterSettings settings) : ISerializer
         writer.WriteStartElement(name);
         foreach (var item in (IEnumerable)value)
         {
-            SerializeObject(writer, item, item.GetType().Name.ToString());
+            Serialize(item, writer);
         }
         writer.WriteEndElement();
 

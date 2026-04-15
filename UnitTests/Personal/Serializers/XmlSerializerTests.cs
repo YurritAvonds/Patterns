@@ -1,7 +1,7 @@
 ﻿using Patterns.Personal.Serializers.Examples;
 using System.Xml;
 using System.Xml.Linq;
-using UnitTests.Personal.Serializers.Examples;
+using UnitTests.Personal.Serializers.Examples.Abstract;
 
 namespace UnitTests.Personal.Serializers;
 
