@@ -42,7 +42,8 @@ internal class XmlSerializerCareTests
         patient.HasSingleEmptyElement("Status");
 
         var patientName = patient.HasSingle("Names").HasSingle("HumanName");
-        patientName.HasSingleEmptyElement("Use");
+        patientName.HasSingle("Use").HasSingleEmptyElement("Value");
+        patientName.HasSingle("Use").HasSingleEmptyElement("Display");
         patientName.HasSingleEmptyElement("Text");
         patientName.HasSingleEmptyElement("Family");
         patientName.HasSingle("Given").HasSingleEmptyElement("String");
@@ -64,7 +65,8 @@ internal class XmlSerializerCareTests
         practitioner.HasEmptyElement("Role");
 
         var practitionerName = practitioner.HasSingle("Names").HasSingle("HumanName");
-        practitionerName.HasSingleEmptyElement("Use");
+        practitionerName.HasSingle("Use").HasSingleEmptyElement("Value");
+        practitionerName.HasSingle("Use").HasSingleEmptyElement("Display");
         practitionerName.HasSingleEmptyElement("Text");
         practitionerName.HasSingleEmptyElement("Family");
         practitionerName.HasSingle("Given").HasSingleEmptyElement("String");
@@ -80,6 +82,11 @@ internal class XmlSerializerCareTests
         practitionerAddress.HasSingleEmptyElement("ZipCode");
         practitionerAddress.HasSingleEmptyElement("Street");
         practitionerAddress.HasSingleEmptyElement("StreetNumber");
+
+        var observation = doc.HasSingle("Observations").HasSingle("Observation");
+        observation.HasSingle("Code").HasSingleEmptyElement("Value");
+        observation.HasSingle("Code").HasSingleEmptyElement("Display");
+        observation.HasSingleEmptyElement("Text");
     }
 
     [Test]
@@ -151,6 +158,14 @@ internal class XmlSerializerCareTests
         practitionerAddress.HasSingleElementWithValue("ZipCode", "44556");
         practitionerAddress.HasSingleElementWithValue("Street", "Market Street");
         practitionerAddress.HasSingleElementWithValue("StreetNumber", "456");
+
+        var observation = doc.HasSingle("Observations").HasMultiple("Observation", 2);
+        observation[0].HasSingle("Code").HasSingleElementWithValue("Value", "frontheadache");
+        observation[0].HasSingle("Code").HasSingleElementWithValue("Display", "Frontal Headache");
+        observation[0].HasSingleElementWithValue("Text", "Frontal Headache observed");
+        observation[1].HasSingle("Code").HasSingleElementWithValue("Value", "mildfever");
+        observation[1].HasSingle("Code").HasSingleElementWithValue("Display", "Mild Fever");
+        observation[1].HasSingleElementWithValue("Text", "Mild Fever observed");
     }
 
     private static Report CreateExampleReport()
@@ -219,6 +234,18 @@ internal class XmlSerializerCareTests
                 ],
                 Role = "General Practitioner"
             },
+            Observations = [
+                new()
+                {
+                    Code = new Code("frontheadache", "Frontal Headache"),
+                    Text = "Frontal Headache observed"
+                },
+                new()
+                {
+                    Code = new Code("mildfever", "Mild Fever"),
+                    Text = "Mild Fever observed"
+                }
+            ]
         };
     }
 }
