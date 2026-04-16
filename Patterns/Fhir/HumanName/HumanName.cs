@@ -11,8 +11,8 @@ public class HumanName
     public ICollection<string> Given { get; set; } = [];
     public ICollection<string> Prefix { get; set; } = [];
     public ICollection<string> Suffix { get; set; } = [];
-    public DateTime? PeriodStart { get; set; }
-    public DateTime? PeriodEnd { get; set; }
+    public DateTimeOffset? PeriodStart { get; set; }
+    public DateTimeOffset? PeriodEnd { get; set; }
 
     public string? FullName
     {

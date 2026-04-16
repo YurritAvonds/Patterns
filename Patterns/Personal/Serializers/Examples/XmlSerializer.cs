@@ -63,9 +63,13 @@ public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMo
         writer.WriteStartElement(name);
         if (value != null)
         {
-            if (value is DateTime dateTime)
+            if (value is DateTimeOffset dateTimeOffset)
             {
-                writer.WriteString(dateTime.ToString("yyyy-MM-dd HH:mm:ss zzz"));
+                writer.WriteString(dateTimeOffset.ToString("yyyy-MM-dd HH:mm:ss zzz"));
+            }
+            else if (value is DateTime dateTime)
+            {
+                writer.WriteString(dateTime.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             else if (value is DateOnly dateOnly)
             {

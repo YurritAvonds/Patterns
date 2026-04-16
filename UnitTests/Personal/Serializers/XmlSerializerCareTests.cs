@@ -107,38 +107,50 @@ internal class XmlSerializerCareTests
         patientName.HasSingle("Given").HasElementsWithValues("String", ["Ernst", "Ingmar"]);
         patientName.HasSingle("Prefix").HasSingleElementWithValue("String", "Mr");
         patientName.HasSingle("Suffix").HasSingleElementWithValue("String", "dir.");
-        //patientName.HasSingleElementWithValue("PeriodStart", "1918-07-14 12:13:14 +0200");
-        //patientName.HasSingleElementWithValue("PeriodEnd", "2007-07-30 13:14:15 +0200");
+        patientName.HasSingleElementWithValue("PeriodStart", "1918-07-14 12:13:14 +02:00");
+        patientName.HasSingleElementWithValue("PeriodEnd", "2007-07-30 13:14:15 +02:00");
         ////patientName.HasSingleEmptyElement("FullName"); // TODO do not serialize getter only properties?
 
-        //var patientAddress = patient.HasSingle("Addresses").HasSingle("Address");
-        //patientAddress.HasSingleElementWithValue("Country", "Sweden");
-        //patientAddress.HasSingleElementWithValue("City", "Faro");
-        //patientAddress.HasSingleElementWithValue("ZipCode", "12345");
-        //patientAddress.HasSingleElementWithValue("Street", "Main Street");
-        //patientAddress.HasSingleElementWithValue("StreetNumber", "123");
+        var patientAddress = patient.HasSingle("Addresses").HasSingle("Address");
+        patientAddress.HasSingleElementWithValue("Country", "Sweden");
+        patientAddress.HasSingleElementWithValue("City", "Faro");
+        patientAddress.HasSingleElementWithValue("ZipCode", "12345");
+        patientAddress.HasSingleElementWithValue("Street", "Main Street");
+        patientAddress.HasSingleElementWithValue("StreetNumber", "123");
 
-        //var practitioner = doc.HasSingle("Practitioner");
+        var practitioner = doc.HasSingle("Practitioner");
 
-        //practitioner.HasEmptyElement("Role");
+        practitioner.HasElementValue("Role", "General Practitioner");
 
-        //var practitionerName = practitioner.HasSingle("Names").HasSingle("HumanName");
-        //practitionerName.HasSingleEmptyElement("Use");
-        //practitionerName.HasSingleEmptyElement("Text");
-        //practitionerName.HasSingleEmptyElement("Family");
-        //practitionerName.HasSingle("Given").HasSingleEmptyElement("String");
-        //practitionerName.HasSingle("Prefix").HasSingleEmptyElement("String");
-        //practitionerName.HasSingle("Suffix").HasSingleEmptyElement("String");
-        //practitionerName.HasSingleEmptyElement("PeriodStart");
-        //practitionerName.HasSingleEmptyElement("PeriodEnd");
-        ////practitionerName.HasSingleEmptyElement("FullName"); // TODO do not serialize getter only properties?
+        var practitionerNames = practitioner.HasSingle("Names").HasMultiple("HumanName", 2);
+        practitionerNames[0].HasSingle("Use").HasSingleElementWithValue("Value", "official");
+        practitionerNames[0].HasSingle("Use").HasSingleElementWithValue("Display", "Official");
+        practitionerNames[0].HasSingleElementWithValue("Text", "Ms Berit Elisabet Andersson act.");
+        practitionerNames[0].HasSingleElementWithValue("Family", "Andersson");
+        practitionerNames[0].HasSingle("Given").HasElementsWithValues("String", ["Berit", "Elisabet"]);
+        practitionerNames[0].HasSingle("Prefix").HasSingleElementWithValue("String", "Ms");
+        practitionerNames[0].HasSingle("Suffix").HasSingleElementWithValue("String", "act.");
+        practitionerNames[0].HasSingleElementWithValue("PeriodStart", "1935-11-11 14:15:16 +02:00");
+        practitionerNames[0].HasSingleElementWithValue("PeriodEnd", "2019-04-14 16:17:18 +02:00");
+        //practitionerName.HasSingleEmptyElement("FullName"); // TODO do not serialize getter only properties?
 
-        //var practitionerAddress = practitioner.HasSingle("Addresses").HasSingle("Address");
-        //practitionerAddress.HasSingleEmptyElement("Country");
-        //practitionerAddress.HasSingleEmptyElement("City");
-        //practitionerAddress.HasSingleEmptyElement("ZipCode");
-        //practitionerAddress.HasSingleEmptyElement("Street");
-        //practitionerAddress.HasSingleEmptyElement("StreetNumber");
+        practitionerNames[1].HasSingle("Use").HasSingleElementWithValue("Value", "nickname");
+        practitionerNames[1].HasSingle("Use").HasSingleElementWithValue("Display", "Nickname");
+        practitionerNames[1].HasSingleElementWithValue("Text", "Bibi");
+        practitionerNames[1].HasSingleEmptyElement("Family");
+        practitionerNames[1].HasSingle("Given").HasElementsWithValues("String", ["Bibi"]);
+        practitionerNames[1].HasSingleEmptyElement("Prefix");
+        practitionerNames[1].HasSingleEmptyElement("Suffix");
+        practitionerNames[1].HasSingleElementWithValue("PeriodStart", "1935-11-11 14:15:16 +02:00");
+        practitionerNames[1].HasSingleElementWithValue("PeriodEnd", "2019-04-14 16:17:18 +02:00");
+        //practitionerName.HasSingleEmptyElement("FullName"); // TODO do not serialize getter only properties?
+
+        var practitionerAddress = practitioner.HasSingle("Addresses").HasSingle("Address");
+        practitionerAddress.HasSingleElementWithValue("Country", "Sweden");
+        practitionerAddress.HasSingleElementWithValue("City", "Stockholm");
+        practitionerAddress.HasSingleElementWithValue("ZipCode", "44556");
+        practitionerAddress.HasSingleElementWithValue("Street", "Market Street");
+        practitionerAddress.HasSingleElementWithValue("StreetNumber", "456");
     }
 
     private static Report CreateExampleReport()
@@ -154,8 +166,8 @@ internal class XmlSerializerCareTests
                         Given = ["Ernst", "Ingmar"],
                         Family = "Bergman",
                         Use = new Code("official", "Official"),
-                        PeriodStart = new DateTime(1918, 7, 14, 12, 13, 14),
-                        PeriodEnd = new DateTime(2007, 7, 30, 13, 14, 15),
+                        PeriodStart = new DateTimeOffset(1918, 7, 14, 12, 13, 14, new TimeSpan(2,0,0)),
+                        PeriodEnd = new DateTimeOffset(2007, 7, 30, 13, 14, 15, new TimeSpan(2,0,0)),
                         Suffix = ["dir."],
                         Text = "Mr Ernst Ingmar Bergman dir."
                     }
@@ -181,8 +193,8 @@ internal class XmlSerializerCareTests
                         Given = ["Berit", "Elisabet"],
                         Family = "Andersson",
                         Use = new Code("official", "Official"),
-                        PeriodStart = new DateTime(1935, 11, 11, 14, 15, 16),
-                        PeriodEnd = new DateTime(2019, 4, 14, 16, 17, 18),
+                        PeriodStart = new DateTimeOffset(1935, 11, 11, 14, 15, 16, new TimeSpan(2,0,0)),
+                        PeriodEnd = new DateTimeOffset(2019, 4, 14, 16, 17, 18, new TimeSpan(2,0,0)),
                         Suffix = ["act."],
                         Text = "Ms Berit Elisabet Andersson act."
                     },
@@ -190,8 +202,8 @@ internal class XmlSerializerCareTests
                     {
                         Given = ["Bibi"],
                         Use = new Code("nickname", "Nickname"),
-                        PeriodStart = new DateTime(1935, 11, 11, 14, 15, 16),
-                        PeriodEnd = new DateTime(2019, 4, 14, 16, 17, 18),
+                        PeriodStart = new DateTimeOffset(1935, 11, 11, 14, 15, 16, new TimeSpan(2,0,0)),
+                        PeriodEnd = new DateTimeOffset(2019, 4, 14, 16, 17, 18, new TimeSpan(2,0,0)),
                         Text = "Bibi"
                     }
                 ],

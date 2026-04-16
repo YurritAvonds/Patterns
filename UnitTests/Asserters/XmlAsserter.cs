@@ -24,6 +24,16 @@ internal static class XmlAsserter
     public static void HasSingleElementWithValue(this XElement? element, string elementName, string expectedValue)
         => element?.Elements(elementName)?.Single()?.Value.Should().Be(expectedValue);
 
+    public static XElement? HasSingle(this XElement? element, string childElementName)
+        => element?.Elements(childElementName).Single();
+
+    public static IList<XElement> HasMultiple(this XElement? element, string childElementName, int amount)
+    {
+        var relevantElements = element?.Elements(childElementName);
+        relevantElements?.Count().Should().Be(amount);
+        return relevantElements?.ToList() ?? [];
+    }
+
     public static void HasElementsWithValues(this XElement? element, string elementName, string[] expectedValues)
     {
         var elements = element?.Elements(elementName).ToList();
@@ -35,7 +45,4 @@ internal static class XmlAsserter
             }
         }
     }
-
-    public static XElement HasSingle(this XElement? element, string childElementName)
-        => element?.Elements(childElementName).Single();
 }
