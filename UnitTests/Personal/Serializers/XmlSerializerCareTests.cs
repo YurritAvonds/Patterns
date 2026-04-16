@@ -2,6 +2,7 @@
 using Patterns.Personal.Serializers.Concept;
 using Patterns.Personal.Serializers.Examples;
 using System.Xml;
+using System.Xml.Linq;
 using UnitTests.Asserters;
 using UnitTests.Personal.Serializers.Examples.Care;
 
@@ -38,55 +39,24 @@ internal class XmlSerializerCareTests
         var doc = result.IsValidXmlNamed("Report");
 
         var patient = doc.HasSingle("Patient");
-
         patient.HasSingleEmptyElement("Status");
-
         var patientName = patient.HasSingle("Names").HasSingle("HumanName");
-        patientName.HasSingle("Use").HasSingleEmptyElement("Value");
-        patientName.HasSingle("Use").HasSingleEmptyElement("Display");
-        patientName.HasSingleEmptyElement("Text");
-        patientName.HasSingleEmptyElement("Family");
-        patientName.HasSingle("Given").HasSingleEmptyElement("String");
-        patientName.HasSingle("Prefix").HasSingleEmptyElement("String");
-        patientName.HasSingle("Suffix").HasSingleEmptyElement("String");
-        patientName.HasSingleEmptyElement("PeriodStart");
-        patientName.HasSingleEmptyElement("PeriodEnd");
-        patientName.HasNoElement("FullName");
-
+        AssertNameIsEmpty(patientName);
         var patientAddress = patient.HasSingle("Addresses").HasSingle("Address");
-        patientAddress.HasSingleEmptyElement("Country");
-        patientAddress.HasSingleEmptyElement("City");
-        patientAddress.HasSingleEmptyElement("ZipCode");
-        patientAddress.HasSingleEmptyElement("Street");
-        patientAddress.HasSingleEmptyElement("StreetNumber");
+        AssertAddressIsEmpty(patientAddress);
 
         var practitioner = doc.HasSingle("Practitioner");
-
         practitioner.HasEmptyElement("Role");
-
         var practitionerName = practitioner.HasSingle("Names").HasSingle("HumanName");
-        practitionerName.HasSingle("Use").HasSingleEmptyElement("Value");
-        practitionerName.HasSingle("Use").HasSingleEmptyElement("Display");
-        practitionerName.HasSingleEmptyElement("Text");
-        practitionerName.HasSingleEmptyElement("Family");
-        practitionerName.HasSingle("Given").HasSingleEmptyElement("String");
-        practitionerName.HasSingle("Prefix").HasSingleEmptyElement("String");
-        practitionerName.HasSingle("Suffix").HasSingleEmptyElement("String");
-        practitionerName.HasSingleEmptyElement("PeriodStart");
-        practitionerName.HasSingleEmptyElement("PeriodEnd");
-        practitionerName.HasNoElement("FullName");
-
+        AssertNameIsEmpty(practitionerName);
         var practitionerAddress = practitioner.HasSingle("Addresses").HasSingle("Address");
-        practitionerAddress.HasSingleEmptyElement("Country");
-        practitionerAddress.HasSingleEmptyElement("City");
-        practitionerAddress.HasSingleEmptyElement("ZipCode");
-        practitionerAddress.HasSingleEmptyElement("Street");
-        practitionerAddress.HasSingleEmptyElement("StreetNumber");
+        AssertAddressIsEmpty(practitionerAddress);
 
         var observation = doc.HasSingle("Observations").HasSingle("Observation");
-        observation.HasSingle("Code").HasSingleEmptyElement("Value");
-        observation.HasSingle("Code").HasSingleEmptyElement("Display");
         observation.HasSingleEmptyElement("Text");
+        var observationCode = observation.HasSingle("Code");
+        observationCode.HasSingleEmptyElement("Value");
+        observationCode.HasSingleEmptyElement("Display");
     }
 
     [Test]
@@ -103,69 +73,26 @@ internal class XmlSerializerCareTests
         var doc = result.IsValidXmlNamed("Report");
 
         var patient = doc.HasSingle("Patient");
-
         patient.HasSingleElementWithValue("Status", "Default");
-
         var patientName = patient.HasSingle("Names").HasSingle("HumanName");
-        patientName.HasSingle("Use").HasSingleElementWithValue("Value", "official");
-        patientName.HasSingle("Use").HasSingleElementWithValue("Display", "Official");
-        patientName.HasSingleElementWithValue("Text", "Mr Ernst Ingmar Bergman dir.");
-        patientName.HasSingleElementWithValue("Family", "Bergman");
-        patientName.HasSingle("Given").HasElementsWithValues("String", ["Ernst", "Ingmar"]);
-        patientName.HasSingle("Prefix").HasSingleElementWithValue("String", "Mr");
-        patientName.HasSingle("Suffix").HasSingleElementWithValue("String", "dir.");
-        patientName.HasSingleElementWithValue("PeriodStart", "1918-07-14 12:13:14 +02:00");
-        patientName.HasSingleElementWithValue("PeriodEnd", "2007-07-30 13:14:15 +02:00");
-        patientName.HasNoElement("FullName");
-
+        AssertName(patientName, "official", "Official", "Mr Ernst Ingmar Bergman dir.", "Bergman",
+            ["Ernst", "Ingmar"], "Mr", "dir.", "1918-07-14 12:13:14 +02:00", "2007-07-30 13:14:15 +02:00");
         var patientAddress = patient.HasSingle("Addresses").HasSingle("Address");
-        patientAddress.HasSingleElementWithValue("Country", "Sweden");
-        patientAddress.HasSingleElementWithValue("City", "Faro");
-        patientAddress.HasSingleElementWithValue("ZipCode", "12345");
-        patientAddress.HasSingleElementWithValue("Street", "Main Street");
-        patientAddress.HasSingleElementWithValue("StreetNumber", "123");
+        AssertAddress(patientAddress, "Sweden", "Faro", "12345", "Main Street", "123");
 
         var practitioner = doc.HasSingle("Practitioner");
-
         practitioner.HasElementValue("Role", "General Practitioner");
-
         var practitionerNames = practitioner.HasSingle("Names").HasMultiple("HumanName", 2);
-        practitionerNames[0].HasSingle("Use").HasSingleElementWithValue("Value", "official");
-        practitionerNames[0].HasSingle("Use").HasSingleElementWithValue("Display", "Official");
-        practitionerNames[0].HasSingleElementWithValue("Text", "Ms Berit Elisabet Andersson act.");
-        practitionerNames[0].HasSingleElementWithValue("Family", "Andersson");
-        practitionerNames[0].HasSingle("Given").HasElementsWithValues("String", ["Berit", "Elisabet"]);
-        practitionerNames[0].HasSingle("Prefix").HasSingleElementWithValue("String", "Ms");
-        practitionerNames[0].HasSingle("Suffix").HasSingleElementWithValue("String", "act.");
-        practitionerNames[0].HasSingleElementWithValue("PeriodStart", "1935-11-11 14:15:16 +02:00");
-        practitionerNames[0].HasSingleElementWithValue("PeriodEnd", "2019-04-14 16:17:18 +02:00");
-        practitionerNames[0].HasNoElement("FullName");
-
-        practitionerNames[1].HasSingle("Use").HasSingleElementWithValue("Value", "nickname");
-        practitionerNames[1].HasSingle("Use").HasSingleElementWithValue("Display", "Nickname");
-        practitionerNames[1].HasSingleElementWithValue("Text", "Bibi");
-        practitionerNames[1].HasSingleEmptyElement("Family");
-        practitionerNames[1].HasSingle("Given").HasElementsWithValues("String", ["Bibi"]);
-        practitionerNames[1].HasSingleEmptyElement("Prefix");
-        practitionerNames[1].HasSingleEmptyElement("Suffix");
-        practitionerNames[1].HasSingleElementWithValue("PeriodStart", "1935-11-11 14:15:16 +02:00");
-        practitionerNames[1].HasSingleElementWithValue("PeriodEnd", "2019-04-14 16:17:18 +02:00");
-        practitionerNames[1].HasNoElement("FullName");
-
+        AssertName(practitionerNames[0], "official", "Official", "Ms Berit Elisabet Andersson act.", "Andersson",
+            ["Berit", "Elisabet"], "Ms", "act.", "1935-11-11 14:15:16 +02:00", "2019-04-14 16:17:18 +02:00");
+        AssertName(practitionerNames[1], "nickname", "Nickname", "Bibi", string.Empty,
+            ["Bibi"], string.Empty, string.Empty, "1935-11-11 14:15:16 +02:00", "2019-04-14 16:17:18 +02:00");
         var practitionerAddress = practitioner.HasSingle("Addresses").HasSingle("Address");
-        practitionerAddress.HasSingleElementWithValue("Country", "Sweden");
-        practitionerAddress.HasSingleElementWithValue("City", "Stockholm");
-        practitionerAddress.HasSingleElementWithValue("ZipCode", "44556");
-        practitionerAddress.HasSingleElementWithValue("Street", "Market Street");
-        practitionerAddress.HasSingleElementWithValue("StreetNumber", "456");
+        AssertAddress(practitionerAddress, "Sweden", "Stockholm", "44556", "Market Street", "456");
 
         var observation = doc.HasSingle("Observations").HasMultiple("Observation", 2);
-        observation[0].HasSingle("Code").HasSingleElementWithValue("Value", "frontheadache");
-        observation[0].HasSingle("Code").HasSingleElementWithValue("Display", "Frontal Headache");
-        observation[0].HasSingleElementWithValue("Text", "Frontal Headache observed");
-        observation[1].HasSingle("Code").HasSingleElementWithValue("Value", "mildfever");
-        observation[1].HasSingle("Code").HasSingleElementWithValue("Display", "Mild Fever");
-        observation[1].HasSingleElementWithValue("Text", "Mild Fever observed");
+        AssertObservation(observation[0], "Frontal Headache observed", "frontheadache", "Frontal Headache");
+        AssertObservation(observation[1], "Mild Fever observed", "mildfever", "Mild Fever");
     }
 
     private static Report CreateExampleReport()
@@ -247,5 +174,62 @@ internal class XmlSerializerCareTests
                 }
             ]
         };
+    }
+
+    private static void AssertNameIsEmpty(XElement? practitionerName)
+    {
+        var practitionerNameUse = practitionerName.HasSingle("Use");
+        practitionerNameUse.HasSingleEmptyElement("Value");
+        practitionerNameUse.HasSingleEmptyElement("Display");
+        practitionerName.HasSingleEmptyElement("Text");
+        practitionerName.HasSingleEmptyElement("Family");
+        practitionerName.HasSingle("Given").HasSingleEmptyElement("String");
+        practitionerName.HasSingle("Prefix").HasSingleEmptyElement("String");
+        practitionerName.HasSingle("Suffix").HasSingleEmptyElement("String");
+        practitionerName.HasSingleEmptyElement("PeriodStart");
+        practitionerName.HasSingleEmptyElement("PeriodEnd");
+        practitionerName.HasNoElement("FullName");
+    }
+
+    private static void AssertAddressIsEmpty(XElement? patientAddress)
+    {
+        patientAddress.HasSingleEmptyElement("Country");
+        patientAddress.HasSingleEmptyElement("City");
+        patientAddress.HasSingleEmptyElement("ZipCode");
+        patientAddress.HasSingleEmptyElement("Street");
+        patientAddress.HasSingleEmptyElement("StreetNumber");
+    }
+
+    private static void AssertObservation(XElement observation, string text, string code, string display)
+    {
+        observation.HasSingleElementWithValue("Text", text);
+        var observationCode = observation.HasSingle("Code");
+        observationCode.HasSingleElementWithValue("Value", code);
+        observationCode.HasSingleElementWithValue("Display", display);
+    }
+
+    private static void AssertName(XElement? patientName, string useCode, string useDisplay, string text,
+        string family, string[] given, string prefix, string suffix, string periodStart, string periodEnd)
+    {
+        patientName.HasSingle("Use").HasSingleElementWithValue("Value", useCode);
+        patientName.HasSingle("Use").HasSingleElementWithValue("Display", useDisplay);
+        patientName.HasSingleElementWithValue("Text", text);
+        patientName.HasSingleElementWithValue("Family", family);
+        patientName.HasSingle("Given").HasElementsWithValues("String", given);
+        patientName.HasSingle("Prefix").HasSingleElementWithValue("String", prefix);
+        patientName.HasSingle("Suffix").HasSingleElementWithValue("String", suffix);
+        patientName.HasSingleElementWithValue("PeriodStart", periodStart);
+        patientName.HasSingleElementWithValue("PeriodEnd", periodEnd);
+        patientName.HasNoElement("FullName");
+    }
+
+    private static void AssertAddress(XElement? practitionerAddress, string country, string city,
+        string zipCode, string street, string streetNumber)
+    {
+        practitionerAddress.HasSingleElementWithValue("Country", country);
+        practitionerAddress.HasSingleElementWithValue("City", city);
+        practitionerAddress.HasSingleElementWithValue("ZipCode", zipCode);
+        practitionerAddress.HasSingleElementWithValue("Street", street);
+        practitionerAddress.HasSingleElementWithValue("StreetNumber", streetNumber);
     }
 }
