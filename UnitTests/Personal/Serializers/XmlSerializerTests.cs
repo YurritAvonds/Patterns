@@ -19,7 +19,7 @@ internal class XmlSerializerTests
                 OmitXmlDeclaration = true,
                 ConformanceLevel = ConformanceLevel.Auto
             },
-            CollectionSerializationMode.EmptyCollection
+            NullOrEmptyMode.SkipNullOrEmpty
         );
     }
 

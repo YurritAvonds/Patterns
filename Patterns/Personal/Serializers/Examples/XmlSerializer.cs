@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace Patterns.Personal.Serializers.Examples;
 
-public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMode collectionMode) : ISerializer
+public class XmlSerializer(XmlWriterSettings settings, NullOrEmptyMode nullOrEmptyMode) : ISerializer
 {
     /// <summary>
     /// Convert C# objects to corresponding XML representation.
@@ -49,7 +49,7 @@ public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMo
                     SerializeSimpleType(writer, value, property.Name);
                     break;
                 case HighLevelType.Object:
-                    SerializeObject(writer, value, property.Name);
+                    SerializeObject(writer, value, property.PropertyType, property.Name);
                     break;
                 case HighLevelType.Collection:
                     SerializeCollection(writer, value, property.Name);
@@ -91,13 +91,20 @@ public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMo
         return;
     }
 
-    private void SerializeObject(XmlWriter writer, object? value, string name)
+    private void SerializeObject(XmlWriter writer, object? value, Type type, string name)
     {
         writer.WriteStartElement(name);
-        if (value != null)
+
+        if (nullOrEmptyMode == NullOrEmptyMode.SerializeEmptyExample
+            && value == null)
+        {
+            SerializeEmptyExampleObject(writer, type);
+        }
+        else if (value != null)
         {
             Serialize(value, writer);
         }
+
         writer.WriteEndElement();
 
         return;
@@ -112,10 +119,10 @@ public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMo
 
         writer.WriteStartElement(name);
 
-        if (collectionMode == CollectionSerializationMode.SingleObjectInEmptyCollection
+        if (nullOrEmptyMode == NullOrEmptyMode.SerializeEmptyExample
             && !((IEnumerable)value).Cast<object>().Any())
         {
-            SerializeEmptyCollectionObject(writer, value);
+            SerializeEmptyCollectionObject(writer, (ICollection)value);
         }
 
         // Filled collection
@@ -131,9 +138,9 @@ public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMo
         return;
     }
 
-    private void SerializeEmptyCollectionObject(XmlWriter writer, object value)
+    private void SerializeEmptyCollectionObject(XmlWriter writer, ICollection collection)
     {
-        if (TypeChecker.Concept.TypeChecker.GetCollectionElementType(value.GetType()) is not Type elementType)
+        if (TypeChecker.Concept.TypeChecker.GetCollectionElementType(collection.GetType()) is not Type elementType)
         {
             return;
         }
@@ -150,6 +157,15 @@ public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMo
             writer.WriteStartElement(instance.GetType().Name);
             Serialize(instance, writer);
             writer.WriteEndElement();
+        }
+    }
+
+    private void SerializeEmptyExampleObject(XmlWriter writer, Type type)
+    {
+        if (type != null
+            && Activator.CreateInstance(type) is object instance)
+        {
+            Serialize(instance, writer);
         }
     }
 }
