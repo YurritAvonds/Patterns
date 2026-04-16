@@ -37,7 +37,9 @@ public class XmlSerializer(XmlWriterSettings settings, CollectionSerializationMo
             return;
         }
 
-        foreach (var property in rootObject.GetType().GetProperties())
+        foreach (var property in rootObject.GetType()
+            .GetProperties()
+            .Where(p => p.SetMethod?.IsPublic == true))
         {
             var value = property.GetValue(rootObject);
 

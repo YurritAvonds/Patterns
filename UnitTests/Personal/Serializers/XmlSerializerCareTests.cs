@@ -50,7 +50,7 @@ internal class XmlSerializerCareTests
         patientName.HasSingle("Suffix").HasSingleEmptyElement("String");
         patientName.HasSingleEmptyElement("PeriodStart");
         patientName.HasSingleEmptyElement("PeriodEnd");
-        patientName.HasSingleEmptyElement("FullName"); // TODO do not serialize getter only properties?
+        patientName.HasNoElement("FullName");
 
         var patientAddress = patient.HasSingle("Addresses").HasSingle("Address");
         patientAddress.HasSingleEmptyElement("Country");
@@ -72,7 +72,7 @@ internal class XmlSerializerCareTests
         practitionerName.HasSingle("Suffix").HasSingleEmptyElement("String");
         practitionerName.HasSingleEmptyElement("PeriodStart");
         practitionerName.HasSingleEmptyElement("PeriodEnd");
-        practitionerName.HasSingleEmptyElement("FullName"); // TODO do not serialize getter only properties?
+        practitionerName.HasNoElement("FullName");
 
         var practitionerAddress = practitioner.HasSingle("Addresses").HasSingle("Address");
         practitionerAddress.HasSingleEmptyElement("Country");
@@ -109,7 +109,7 @@ internal class XmlSerializerCareTests
         patientName.HasSingle("Suffix").HasSingleElementWithValue("String", "dir.");
         patientName.HasSingleElementWithValue("PeriodStart", "1918-07-14 12:13:14 +02:00");
         patientName.HasSingleElementWithValue("PeriodEnd", "2007-07-30 13:14:15 +02:00");
-        ////patientName.HasSingleEmptyElement("FullName"); // TODO do not serialize getter only properties?
+        patientName.HasNoElement("FullName");
 
         var patientAddress = patient.HasSingle("Addresses").HasSingle("Address");
         patientAddress.HasSingleElementWithValue("Country", "Sweden");
@@ -132,7 +132,7 @@ internal class XmlSerializerCareTests
         practitionerNames[0].HasSingle("Suffix").HasSingleElementWithValue("String", "act.");
         practitionerNames[0].HasSingleElementWithValue("PeriodStart", "1935-11-11 14:15:16 +02:00");
         practitionerNames[0].HasSingleElementWithValue("PeriodEnd", "2019-04-14 16:17:18 +02:00");
-        //practitionerName.HasSingleEmptyElement("FullName"); // TODO do not serialize getter only properties?
+        practitionerNames[0].HasNoElement("FullName");
 
         practitionerNames[1].HasSingle("Use").HasSingleElementWithValue("Value", "nickname");
         practitionerNames[1].HasSingle("Use").HasSingleElementWithValue("Display", "Nickname");
@@ -143,7 +143,7 @@ internal class XmlSerializerCareTests
         practitionerNames[1].HasSingleEmptyElement("Suffix");
         practitionerNames[1].HasSingleElementWithValue("PeriodStart", "1935-11-11 14:15:16 +02:00");
         practitionerNames[1].HasSingleElementWithValue("PeriodEnd", "2019-04-14 16:17:18 +02:00");
-        //practitionerName.HasSingleEmptyElement("FullName"); // TODO do not serialize getter only properties?
+        practitionerNames[1].HasNoElement("FullName");
 
         var practitionerAddress = practitioner.HasSingle("Addresses").HasSingle("Address");
         practitionerAddress.HasSingleElementWithValue("Country", "Sweden");

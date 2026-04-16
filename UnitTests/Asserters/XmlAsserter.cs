@@ -27,6 +27,9 @@ internal static class XmlAsserter
     public static XElement? HasSingle(this XElement? element, string childElementName)
         => element?.Elements(childElementName).Single();
 
+    public static void HasNoElement(this XElement? element, string childElementName)
+        => element?.Elements(childElementName).Should().BeEmpty();
+
     public static IList<XElement> HasMultiple(this XElement? element, string childElementName, int amount)
     {
         var relevantElements = element?.Elements(childElementName);
