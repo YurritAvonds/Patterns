@@ -46,7 +46,7 @@ internal class XmlSerializerCareTests
         AssertAddressIsEmpty(patientAddress);
 
         var practitioner = doc.HasSingle("Practitioner");
-        practitioner.HasEmptyElement("Role");
+        practitioner.HasSingleEmptyElement("Role");
         var practitionerName = practitioner.HasSingle("Names").HasSingle("HumanName");
         AssertNameIsEmpty(practitionerName);
         var practitionerAddress = practitioner.HasSingle("Addresses").HasSingle("Address");
@@ -81,7 +81,7 @@ internal class XmlSerializerCareTests
         AssertAddress(patientAddress, "Sweden", "Faro", "12345", "Main Street", "123");
 
         var practitioner = doc.HasSingle("Practitioner");
-        practitioner.HasElementValue("Role", "General Practitioner");
+        practitioner.HasSingleElementWithValue("Role", "General Practitioner");
         var practitionerNames = practitioner.HasSingle("Names").HasMultiple("HumanName", 2);
         AssertName(practitionerNames[0], "official", "Official", "Ms Berit Elisabet Andersson act.", "Andersson",
             ["Berit", "Elisabet"], "Ms", "act.", "1935-11-11 14:15:16 +02:00", "2019-04-14 16:17:18 +02:00");

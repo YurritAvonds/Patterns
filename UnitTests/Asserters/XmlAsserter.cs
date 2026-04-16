@@ -12,17 +12,17 @@ internal static class XmlAsserter
         return doc;
     }
 
-    public static void HasElementValue(this XElement? element, string elementName, string expectedValue)
-        => element?.Element(elementName)?.Value.Should().Be(expectedValue);
+    public static void HasEmptyValue(this XElement? element)
+        => element?.Value.Should().BeEmpty();
 
-    public static void HasEmptyElement(this XElement? element, string elementName)
-        => element?.Element(elementName)?.Value.Should().BeEmpty();
+    public static void HasValue(this XElement? element, string expectedValue)
+        => element?.Value.Should().Be(expectedValue);
 
     public static void HasSingleEmptyElement(this XElement? element, string elementName)
-        => element?.Elements(elementName)?.Single()?.Value.Should().BeEmpty();
+        => element?.HasSingle(elementName)?.HasEmptyValue();
 
     public static void HasSingleElementWithValue(this XElement? element, string elementName, string expectedValue)
-        => element?.Elements(elementName)?.Single()?.Value.Should().Be(expectedValue);
+        => element?.HasSingle(elementName)?.HasValue(expectedValue);
 
     public static XElement? HasSingle(this XElement? element, string childElementName)
         => element?.Elements(childElementName).Single();
@@ -37,15 +37,17 @@ internal static class XmlAsserter
         return relevantElements?.ToList() ?? [];
     }
 
-    public static void HasElementsWithValues(this XElement? element, string elementName, string[] expectedValues)
+    public static void HasElementsWithValues(this XElement? element, string elementName,
+        string[] expectedValues)
     {
-        var elements = element?.Elements(elementName).ToList();
-        if (elements != null)
+        if (element?.Elements(elementName)?.ToList() is not List<XElement> elements)
         {
-            for (var i = 0; i < elements.Count; i++)
-            {
-                elements[i].Value.Should().Be(expectedValues[i]);
-            }
+            return;
+        }
+
+        for (var i = 0; i < elements.Count; i++)
+        {
+            elements[i].HasValue(expectedValues[i]);
         }
     }
 }
