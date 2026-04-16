@@ -30,13 +30,14 @@ public class XmlSerializer(XmlWriterSettings settings, NullOrEmptyMode nullOrEmp
     {
         var type = rootObject.GetType();
 
-        // Stop recursion for simple types
+        // For simple types, immediately serialize and stop further processing
         if (type.GetHighLevelType() == HighLevelType.Simple)
         {
             SerializeSimpleType(writer, rootObject, rootObject.GetType().Name);
             return;
         }
 
+        // Serialize object properties
         foreach (var property in rootObject.GetType()
             .GetProperties()
             .Where(p => p.SetMethod?.IsPublic == true))
@@ -95,11 +96,13 @@ public class XmlSerializer(XmlWriterSettings settings, NullOrEmptyMode nullOrEmp
     {
         writer.WriteStartElement(name);
 
+        // Null object
         if (nullOrEmptyMode == NullOrEmptyMode.SerializeEmptyExample
             && value == null)
         {
             SerializeEmptyExampleObject(writer, type);
         }
+        // Initialized object
         else if (value != null)
         {
             Serialize(value, writer);
@@ -119,18 +122,21 @@ public class XmlSerializer(XmlWriterSettings settings, NullOrEmptyMode nullOrEmp
 
         writer.WriteStartElement(name);
 
+        // Empty collection
         if (nullOrEmptyMode == NullOrEmptyMode.SerializeEmptyExample
             && !((IEnumerable)value).Cast<object>().Any())
         {
             SerializeEmptyCollectionObject(writer, (ICollection)value);
         }
-
-        // Filled collection
-        foreach (var item in (ICollection)value)
+        else
         {
-            writer.WriteStartElement(item.GetType().Name);
-            Serialize(item, writer);
-            writer.WriteEndElement();
+            // Filled collection
+            foreach (var item in (ICollection)value)
+            {
+                writer.WriteStartElement(item.GetType().Name);
+                Serialize(item, writer);
+                writer.WriteEndElement();
+            }
         }
 
         writer.WriteEndElement();
@@ -140,7 +146,8 @@ public class XmlSerializer(XmlWriterSettings settings, NullOrEmptyMode nullOrEmp
 
     private void SerializeEmptyCollectionObject(XmlWriter writer, ICollection collection)
     {
-        if (TypeChecker.Concept.TypeChecker.GetCollectionElementType(collection.GetType()) is not Type elementType)
+        if (TypeChecker.Concept.TypeChecker.GetCollectionElementType(collection.GetType())
+            is not Type elementType)
         {
             return;
         }
