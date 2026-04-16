@@ -66,26 +66,16 @@ public class XmlSerializer(XmlWriterSettings settings, NullOrEmptyMode nullOrEmp
         writer.WriteStartElement(name);
         if (value != null)
         {
-            if (value is DateTimeOffset dateTimeOffset)
+            var text = value switch
             {
-                writer.WriteString(dateTimeOffset.ToString("yyyy-MM-dd HH:mm:ss zzz"));
-            }
-            else if (value is DateTime dateTime)
-            {
-                writer.WriteString(dateTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            }
-            else if (value is DateOnly dateOnly)
-            {
-                writer.WriteString(dateOnly.ToString("yyyy-MM-dd"));
-            }
-            else if (value is TimeOnly timeOnly)
-            {
-                writer.WriteString(timeOnly.ToString("HH:mm:ss zzz"));
-            }
-            else
-            {
-                writer.WriteString(value.ToString());
-            }
+                DateTimeOffset dto => dto.ToString("yyyy-MM-dd HH:mm:ss zzz"),
+                DateTime dt => dt.ToString("yyyy-MM-dd HH:mm:ss"),
+                DateOnly d => d.ToString("yyyy-MM-dd"),
+                TimeOnly t => t.ToString("HH:mm:ss zzz"),
+                _ => value.ToString()
+            };
+
+            writer.WriteString(text);
         }
         writer.WriteEndElement();
 
