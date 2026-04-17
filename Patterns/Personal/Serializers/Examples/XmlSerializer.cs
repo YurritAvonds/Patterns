@@ -64,7 +64,7 @@ public class XmlSerializer(XmlWriterSettings settings, NullOrEmptyMode nullOrEmp
     private static void SerializeSimpleType(XmlWriter writer, object? value, string name)
     {
         writer.WriteStartElement(name);
-        if (value != null)
+        if (value != null) // TODO what if value is whitespace string?
         {
             var text = value switch
             {
@@ -123,9 +123,16 @@ public class XmlSerializer(XmlWriterSettings settings, NullOrEmptyMode nullOrEmp
             // Filled collection
             foreach (var item in (ICollection)value)
             {
-                writer.WriteStartElement(item.GetType().Name);
-                Serialize(item, writer);
-                writer.WriteEndElement();
+                if (item.GetType().Equals(typeof(string)))
+                {
+                    Serialize(item, writer);
+                }
+                else
+                {
+                    writer.WriteStartElement(item.GetType().Name);
+                    Serialize(item, writer);
+                    writer.WriteEndElement();
+                }
             }
         }
 

@@ -5,7 +5,7 @@ namespace Patterns.Fhir.HumanName;
 
 public class HumanName
 {
-    public Code? Use { get; set; } = new Code(); // TODO avoid init?
+    public Code? Use { get; set; }
     public string? Text { get; set; }
     public string? Family { get; set; }
     public ICollection<string> Given { get; set; } = [];
